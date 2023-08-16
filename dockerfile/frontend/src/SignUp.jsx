@@ -15,7 +15,6 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import './SignUp.css';
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -31,7 +30,7 @@ const theme = createTheme({
     },
 });
 
-export default function SignUp({ children }) {
+export default function SignUp() {
     const [showPassword, setShowPassword] = React.useState(false);
     const [showPassword2, setShowPassword2] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
