@@ -1,8 +1,8 @@
-package com.acorn.demo.jpa.controller;
+package com.acorn.example.jpa.controller;
 
 import com.acorn.core.utils.ResponseUtils;
-import com.acorn.demo.jpa.dto.DemoDTO;
-import com.acorn.demo.jpa.service.DemoService;
+import com.acorn.example.jpa.dto.DemoDTO;
+import com.acorn.example.jpa.service.DemoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +26,13 @@ public class DemoController {
 
   @GetMapping(value = "/demo")
   public List<DemoDTO> getDemo(DemoDTO demoDTO) {
+
     return demoService.retrieveDemo();
   }
 
   @GetMapping(value = "/demoException")
   public List<DemoDTO> getDemoException(DemoDTO demoDTO) {
+
     return demoService.retrieveDemoException();
   }
 
@@ -41,6 +43,7 @@ public class DemoController {
 
   @GetMapping(value = "/demoArrayException")
   public List<DemoDTO> retrieveDemoArrayException(DemoDTO demoDTO) {
+
     return demoService.retrieveDemoArrayException();
   }
 

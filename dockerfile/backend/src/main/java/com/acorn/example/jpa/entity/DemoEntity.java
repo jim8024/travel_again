@@ -1,4 +1,4 @@
-package com.acorn.demo.jpa.entity;
+package com.acorn.example.jpa.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

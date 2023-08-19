@@ -1,4 +1,4 @@
-package com.acorn.demo.jpa.dto;
+package com.acorn.example.jpa.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

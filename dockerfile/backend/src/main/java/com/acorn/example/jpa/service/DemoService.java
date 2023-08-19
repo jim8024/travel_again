@@ -1,10 +1,10 @@
-package com.acorn.demo.jpa.service;
+package com.acorn.example.jpa.service;
 
 import com.acorn.core.customException.BizException;
-import com.acorn.demo.jpa.dto.DemoDTO;
-import com.acorn.demo.jpa.repository.DemoMapper;
-import com.acorn.demo.jpa.entity.DemoEntity;
-import com.acorn.demo.jpa.repository.DemoRepository;
+import com.acorn.example.jpa.dto.DemoDTO;
+import com.acorn.example.jpa.repository.DemoMapper;
+import com.acorn.example.jpa.entity.DemoEntity;
+import com.acorn.example.jpa.repository.DemoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
-package com.acorn.demo.jpa.repository;
+package com.acorn.example.jpa.repository;
 
-import com.acorn.demo.jpa.dto.DemoDTO;
-import com.acorn.demo.jpa.entity.DemoEntity;
+import com.acorn.example.jpa.dto.DemoDTO;
+import com.acorn.example.jpa.entity.DemoEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -1,7 +1,7 @@
-package com.acorn.demo.mybatis.service;
+package com.acorn.example.mybatis.service;
 
-import com.acorn.demo.mybatis.dto.DemoDTO;
-import com.acorn.demo.mybatis.mapper.MybatisDemoMapper;
+import com.acorn.example.mybatis.dto.DemoDTO;
+import com.acorn.example.mybatis.mapper.MybatisDemoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

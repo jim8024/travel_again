@@ -1,4 +1,4 @@
-package com.acorn.demo.mock.controller;
+package com.acorn.example.mock.controller;
 
 //import com.acorn.core.utils.JsonFileReadUtils;
 

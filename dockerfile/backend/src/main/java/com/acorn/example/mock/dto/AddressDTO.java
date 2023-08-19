@@ -1,4 +1,4 @@
-package com.acorn.demo.mock.dto;
+package com.acorn.example.mock.dto;
 
 import lombok.Builder;
 import lombok.Data;

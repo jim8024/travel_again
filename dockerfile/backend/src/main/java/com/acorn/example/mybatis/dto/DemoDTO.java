@@ -1,4 +1,4 @@
-package com.acorn.demo.mybatis.dto;
+package com.acorn.example.mybatis.dto;
 
 import lombok.*;
 

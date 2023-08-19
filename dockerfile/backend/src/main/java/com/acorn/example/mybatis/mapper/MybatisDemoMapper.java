@@ -1,6 +1,6 @@
-package com.acorn.demo.mybatis.mapper;
+package com.acorn.example.mybatis.mapper;
 
-import com.acorn.demo.mybatis.dto.DemoDTO;
+import com.acorn.example.mybatis.dto.DemoDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
