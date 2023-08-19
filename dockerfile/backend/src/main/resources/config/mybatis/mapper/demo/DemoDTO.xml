@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.acorn.travelagain.mybatis.mapper.MybatisDemoMapper">
+    <select id="retrieveDemo" resultType="com.acorn.travelagain.mybatis.dto.DemoDTO">
+      SELECT ID,
+             NAME
+        FROM TB_DEMO
+    </select>
+</mapper>
