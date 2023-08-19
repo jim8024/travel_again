@@ -4,9 +4,9 @@
 # 배포 주소
 개발 버전 : http://
 
-프론트 서버 : 
+프론트 서버 : 3000
 
-백엔드 서버 : 
+백엔드 서버 : 9000
 
 # 시작 가이드
 ### Requirement
@@ -14,7 +14,7 @@ For building and running the application you need:
 - Node.js 18.17.0
 - Npm 9.6.7
 - Java 17
-- MySQL 8.0.33
+- h2 2.1.214
 - Spring Boot 3.1.2
 
 # Stacks
