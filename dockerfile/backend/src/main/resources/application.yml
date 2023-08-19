@@ -15,4 +15,3 @@ spring:
       ddl-auto: update
 server:
   port: '9000'
-couldn't: convert to properties, check your Yaml# H2 Database ??
