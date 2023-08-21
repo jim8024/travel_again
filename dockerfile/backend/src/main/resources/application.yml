@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: acorn
+  profiles:
+    active: local
+  config:
+    import:
+      - classpath:/config/custom/custom.yml
+      - classpath:/config/custom/el.yml
+  messages:
+    basename:
+      - message/message
+      - message/exception
+    encoding: UTF-8
+  h2:
+    console:
+      enabled: true                     # 콘솔 사용
+      path: /h2-console                 # 콘솔 접근 uri
+      settings.trace: false             # 추적 활성화
+      settings.web-allow-others: false  # CORS로 다른 사용자 접근 허용 여부
+  datasource:
+    url: jdbc:h2:file:./data/traveldb     # 파일 저장소
+    username: sa
+    password: hhs1234
+    driverClassName: org.h2.Driver
+    type: com.zaxxer.hikari.HikariDataSource  # 결 풀이 HikariDataSource의 전용 구현을 사용하고 반환하도록 강제
+    hikari:                             # DB Connection Pool
+      auto-commit: true                 # 자동커밋 여부. (default: true)
+      connection-test-query: SELECT 1   # connection 유효성 검사 쿼리
+      pool-name: pool-acorn            # connection pool 이름
+      leak-detection-threshold: 300000
+      idle-timeout: 300000
+      max-lifetime: 600000
+      minimum-idle: 10                  # pool에 유지할 유휴 connection 최소 개수
+      maximum-pool-size: 50             # pool에 유지시킬 수 있는 최대 connection 수
+  jpa:
+    #    database-platform: org.hibernate.dialect.H2Dialect  # 접속할 database의 SQL Dialect 설정, JPA를 활용하여 동적 쿼리 생성시, database에 맞는 방언 sql을 생성
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show-sql: true                  # 모든 SQL문을 콘솔로 출력
+        format_sql: true                # 모든 SQL문을 콘솔로 출력해 준다.
+        hbm2ddl.auto: update            # 앱 시작시 @Entity로 정의한 테이블의 create 문 실행
+        highlight_sql: true
+        use_sql_comments: true          # 디버깅이 용이하도록 SQL문 이외에 추가적인 정보를 출력
+#        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+#        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+
+
+mybatis:
+  mapper-locations: config/mybatis/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+  config: classpath:logback-spring.xml
