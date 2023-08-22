@@ -13,6 +13,9 @@ public class TourListDto {
 
     private String contentid;
     private String contenttypeid;
+    private String cat1;
+    private String cat2;
+    private String cat3;
     private String title;
     private String addr1;
     private String mlevel;

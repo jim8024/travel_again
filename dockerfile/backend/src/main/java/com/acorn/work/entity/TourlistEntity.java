@@ -22,6 +22,14 @@ public class TourlistEntity {
     @Column(length = 32)
     private String contenttypeid;
 
+    @Column(length = 8)
+    private String cat1;
+
+    @Column(length = 16)
+    private String cat2;
+
+    @Column(length = 32)
+    private String cat3;
 
     @Column(length = 100)
     private String title;
