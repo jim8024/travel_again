@@ -1,6 +1,6 @@
 package com.acorn.work.repository;
 
-import com.acorn.work.dto.TourListDto;
+import com.acorn.work.dto.TourListDTO;
 import com.acorn.work.entity.TourlistEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -11,10 +11,10 @@ import java.util.List;
 public interface WorkMapper {
     WorkMapper INSTANCE = Mappers.getMapper(WorkMapper.class);
 
-    TourListDto toTourlistDTO(TourlistEntity tourlistEntity);
-    List<TourListDto> toTourListdto(List<TourlistEntity> tourlistEntity);
+    TourListDTO toTourlistDTO(TourlistEntity tourlistEntity);
+    List<TourListDTO> toTourListdto(List<TourlistEntity> tourlistEntity);
 
-    TourlistEntity toTourlistEntity(TourListDto tourlistDTO);
-    List<TourlistEntity> toTourlistEntitys(List<TourListDto> tourlistDTO);
+    TourlistEntity toTourlistEntity(TourListDTO tourlistDTO);
+    List<TourlistEntity> toTourlistEntitys(List<TourListDTO> tourlistDTO);
 
 }

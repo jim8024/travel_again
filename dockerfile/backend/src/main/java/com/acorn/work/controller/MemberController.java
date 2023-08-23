@@ -1,6 +1,6 @@
 package com.acorn.work.controller;
 
-import com.acorn.work.dto.MemberDto;
+import com.acorn.work.dto.MemberDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MemberController {
 
     @GetMapping("insert")
-    public void insert(MemberDto dto){
+    public void insert(MemberDTO dto){
 
     }
 }
