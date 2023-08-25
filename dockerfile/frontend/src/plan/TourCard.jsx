@@ -6,24 +6,10 @@ import Typography from '@mui/material/Typography';
 import { Button, Card } from '@mui/material';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 import StarIcon from '@mui/icons-material/Star';
-import output from './finalresult.json';
+import output from '../finalresult.json';
+import { textOverCut } from './textOverCut.js';
 
-function textOverCut(txt, len, lastTxt) {
-    if (len === '' || len == null) {
-        // 기본값
-        len = 12;
-    }
-    if (lastTxt === '' || lastTxt == null) {
-        // 기본값
-        lastTxt = '...';
-    }
-    if (txt.length > len) {
-        txt = txt.substr(0, len) + lastTxt;
-    }
-    return txt;
-}
-
-export default function TourCard({  setSelectedItems }) {
+export default function TourCard({ setSelectedItems }) {
     const handleAddButtonClick = (item) => {
         setSelectedItems((choiceItems) => [...choiceItems, item]);
     };
