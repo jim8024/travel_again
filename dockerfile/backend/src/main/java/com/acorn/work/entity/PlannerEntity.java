@@ -1,10 +1,7 @@
 package com.acorn.work.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Table(name = "TB_PLANNER")
 @Getter
@@ -12,12 +9,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class PlannerEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(length = 32)
-    private String planNo;
+    @Column(length = 36)
+    private String planNrego;
 
     @Column(length = 32)
     private String memberId;
