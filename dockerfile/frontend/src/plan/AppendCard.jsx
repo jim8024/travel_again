@@ -4,26 +4,16 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, Card } from '@mui/material';
-import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 import StarIcon from '@mui/icons-material/Star';
+import { textOverCut } from './textOverCut.js';
+import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 
-function textOverCut(txt, len, lastTxt) {
-    if (len === '' || len == null) {
-        // 기본값
-        len = 12;
-    }
-    if (lastTxt === '' || lastTxt == null) {
-        // 기본값
-        lastTxt = '...';
-    }
-    if (txt.length > len) {
-        txt = txt.substr(0, len) + lastTxt;
-    }
-    return txt;
-}
+export default function AppendCard({ selectedItems, setSelectedItems }) {
+    const removeBtnClick = (item) => {
+        const updatedItems = selectedItems.filter((i) => i.contentid !== item.contentid);
+        setSelectedItems(updatedItems);
+    };
 
-export default function AppendCard({ selectedItems }) {
-    // console.log('Test.jsx :', { selectedItems });
     return (
         <>
             {selectedItems.map((item, index) => (
@@ -83,6 +73,7 @@ export default function AppendCard({ selectedItems }) {
                         }}
                     >
                         <Button
+                            onClick={() => removeBtnClick(item)}
                             sx={{
                                 height: '30px',
                                 width: '30px',
@@ -91,7 +82,7 @@ export default function AppendCard({ selectedItems }) {
                                 marginRight: '9px',
                             }}
                         >
-                            <AddBoxRoundedIcon />
+                            <IndeterminateCheckBoxIcon color="error" />
                         </Button>
                     </div>
                 </Card>
