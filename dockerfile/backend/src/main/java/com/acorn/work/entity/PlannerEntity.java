@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Table(name = "TB_PLANNER")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
