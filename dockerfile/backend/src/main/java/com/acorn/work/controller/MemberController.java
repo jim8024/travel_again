@@ -1,20 +1,29 @@
 package com.acorn.work.controller;
 
+import com.acorn.core.utils.ResponseUtils;
 import com.acorn.work.dto.MemberDTO;
 import com.acorn.work.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller("/member/")
+@Controller
+@RequestMapping("/member")
+@ResponseBody
+@RequiredArgsConstructor
 public class MemberController {
 
-    @Autowired
-    private MemberService memberService;
+    private final MemberService memberService;
 
-    @GetMapping("insert")
 
-    public void insert(MemberDTO dto){
-
+    @PostMapping("/signup")
+    public ResponseEntity signup(@RequestBody MemberDTO memberDTO){
+        System.out.println(memberDTO.toString());
+        memberService.signup(memberDTO);
+        return ResponseUtils.completed(memberDTO.getMemberId());
     }
 }

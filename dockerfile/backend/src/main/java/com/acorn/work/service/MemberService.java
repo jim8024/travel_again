@@ -1,26 +1,17 @@
 package com.acorn.work.service;
 
 import com.acorn.work.dto.MemberDTO;
+import com.acorn.work.mapstruct.MemberMapper;
 import com.acorn.work.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
+@RequiredArgsConstructor
 @Service
 public class MemberService {
 
-    @Autowired
-    MemberRepository memberRepository;
-    public void signup(MemberDTO dto){
-
-    }
-
-    @PostMapping("create")
-    public ResponseEntity<MemberDTO> createMember(MemberDTO dto) {
-
-//        Member savedMember = memberService.createMember(member);
-//        return new ResponseEntity<>(savedMember, HttpStatus.OK);
-        return null;
+    private final MemberRepository memberRepository;
+    public void signup(MemberDTO memberDTO){
+        memberRepository.save(MemberMapper.INSTANCE.toEntity(memberDTO));
     }
 }

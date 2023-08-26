@@ -1,7 +1,7 @@
 package com.acorn.work.loading.service;
 
 import com.acorn.core.customException.BizException;
-import com.acorn.work.dto.TourListDTO;
+import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.entity.TourlistEntity;
 import com.acorn.work.mapstruct.TourlistMapper;
 import com.acorn.work.repository.TourlistRepository;
@@ -33,8 +33,8 @@ public class TourlistLoadingService {
 
         Reader reader = fileLoad(filename);
 
-        List<TourListDTO> tourlistdto =  gson.fromJson(reader,
-                new TypeToken<List<TourListDTO>>(){}.getType() );
+        List<TourlistDTO> tourlistdto =  gson.fromJson(reader,
+                new TypeToken<List<TourlistDTO>>(){}.getType() );
 
         List<TourlistEntity> tourlistEntities = TourlistMapper.INSTANCE.toEntities(tourlistdto);
 
