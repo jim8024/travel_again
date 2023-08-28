@@ -19,4 +19,9 @@ public class TourlistService {
         List<TourlistEntity> tourlistEntities = tourlistRepository.findByAreacode(areacode);
         return TourlistMapper.INSTANCE.toDTOs(tourlistEntities);
     }
+
+    public List<TourlistDTO> getTourlist() {
+        List<TourlistEntity> tourlistEntities = tourlistRepository.findAll();
+        return TourlistMapper.INSTANCE.toDTOs(tourlistEntities);
+    }
 }

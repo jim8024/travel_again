@@ -20,10 +20,15 @@ public class MemberController {
     private final MemberService memberService;
 
 
+    /**
+     * 회원가입
+     * @param memberDTO
+     * @return memberId
+     */
     @PostMapping("/signup")
     public ResponseEntity signup(@RequestBody MemberDTO memberDTO){
         System.out.println(memberDTO.toString());
         memberService.signup(memberDTO);
-        return ResponseUtils.completed(memberDTO.getMemberId());
+        return ResponseUtils.completed("memberId : " + memberDTO.getMemberId());
     }
 }

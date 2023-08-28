@@ -63,6 +63,7 @@ public class TourlistLoadingService {
     private Reader fileLoad(String filename) {
         Reader reader = null;
         try {
+            System.out.println(this.tourlistDir);
             reader = new FileReader( this.tourlistDir +"/"+ filename + ".json");
         } catch (FileNotFoundException e) {
             throw new BizException(filename + " 파일이 없습니다.");
