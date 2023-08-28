@@ -27,6 +27,13 @@ public class PlannerController {
         return ResponseUtils.completed(plannerDTO);
     }
 
+    @GetMapping("/list")
+    @ResponseBody
+    public ResponseEntity plannerList(){
+
+        return ResponseUtils.completed(plannerService.plannerList());
+    }
+
     @GetMapping("")
     @ResponseBody
     public ResponseEntity plannerDetail(@RequestParam String plannerNo){

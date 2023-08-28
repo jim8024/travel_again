@@ -52,4 +52,8 @@ public class PlannerService {
     }
 
 
+    public List<PlannerDTO> plannerList() {
+        List<PlannerDTO> plannerDTOS = PlannerMapper.INSTANCE.toDTOs(plannerRepository.findAll());
+        return plannerDTOS;
+    }
 }
