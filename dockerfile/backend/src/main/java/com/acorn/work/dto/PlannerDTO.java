@@ -5,20 +5,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
 public class PlannerDTO {
 
-    private String planNrego;
+    private String plannerNo;
 
     private String memberId;
 
     private String region;
 
-    private String date;
+    private String startDate;
 
-    private String seq;
+    private String endDate;
+
+    private List<PlannerTourlistDTO> plannerTourlistDTOS;
 
 }
