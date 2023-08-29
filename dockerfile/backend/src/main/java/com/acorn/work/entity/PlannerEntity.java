@@ -13,20 +13,19 @@ import lombok.*;
 public class PlannerEntity extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(length = 36)
-    private String planNrego;
+    private String plannerNo;
 
-    @Column(length = 32)
+    @Column(length = 36)
     private String memberId;
 
-    @Column(length = 50)
+    @Column(length = 4)
     private String region;
 
-    @Column(length = 20)
-    private String date;
+    @Column(length = 40)
+    private String startDate;
 
-    @Column(length = 10)
-    private String seq;
+    @Column(length = 40)
+    private String endDate;
 
 }

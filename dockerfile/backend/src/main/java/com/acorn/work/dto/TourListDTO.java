@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class TourListDTO {
+public class TourlistDTO {
 
     private String contentid;
     private String contenttypeid;
