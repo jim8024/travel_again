@@ -43,6 +43,11 @@ public class TourlistController {
         return ResponseUtils.completed(tourlistDTOs);
     }
 
+    // recommend (추천수) 에 따라서 정렬
+//    @GetMapping("/byrec")
+//    public ResponseEntity getTourlistOrderByRec(){
+//        List<TourlistDTO> tourlistDTOS = tourlistService.getTourlistOrderBy
+//    }
 
 
 

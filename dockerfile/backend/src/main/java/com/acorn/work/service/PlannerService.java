@@ -26,12 +26,12 @@ public class PlannerService {
         plannerRepository.save(PlannerMapper.INSTANCE.toEntity(plannerDTO));
 
         List<PlannerTourlistDTO> plannerTourlistDTOS = plannerDTO.getPlannerTourlistDTOS();
-        System.out.println(plannerTourlistDTOS.toString());
+//        System.out.println(plannerTourlistDTOS.toString());
 
         for (PlannerTourlistDTO plannerTourlistDTO : plannerTourlistDTOS) {
             plannerTourlistDTO.setPlannerNo(plannerNo);
         }
-        System.out.println(plannerTourlistDTOS.toString());
+//        System.out.println(plannerTourlistDTOS.toString());
 
 
         plannerTourlistRepository.saveAll(PlannerTourlistMapper.INSTANCE.toEntities(plannerTourlistDTOS));
@@ -41,12 +41,11 @@ public class PlannerService {
     public PlannerDTO plannerDetail(String plannerNo){
         // Optional -> plannerDTO
         PlannerDTO plannerDTO = PlannerMapper.INSTANCE.toDTO(plannerRepository.findByPlannerNo(plannerNo).get());
-        System.out.println(plannerDTO);
+//        System.out.println(plannerDTO);
         // Planner에 대한 상세정보 plannerTourlist
         List<PlannerTourlistDTO> plannerTourlistDTOS = PlannerTourlistMapper.INSTANCE.toDTOs(plannerTourlistRepository.findByPlannerNo(plannerNo));
-        System.out.println(plannerTourlistDTOS);
+//        System.out.println(plannerTourlistDTOS);
         plannerDTO.setPlannerTourlistDTOS(plannerTourlistDTOS);
-
 
         return plannerDTO;
     }
