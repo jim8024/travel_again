@@ -1,0 +1,65 @@
+package com.acorn.work.service;
+
+import com.acorn.work.dto.JjimDTO;
+import com.acorn.work.dto.MemberDTO;
+import com.acorn.work.mapstruct.JjimMapper;
+import com.acorn.work.mapstruct.MemberMapper;
+import com.acorn.work.repository.JjimRepository;
+import com.acorn.work.repository.MemberRepository;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Random;
+
+@Service
+@RequiredArgsConstructor
+public class JjimService {
+    private final JjimRepository jjimRepository;
+
+    private final MemberRepository memberRepository;
+
+    private final HttpSession session;
+
+    public void recommendTourlist (String contentid){
+        // id를 이용해서 PK인 memberNo 를 찾는게 뭔가 너무 맘에 안들지만... 일단 패스...
+        String memberId = (String) session.getAttribute("id");
+        String memberNo = memberRepository.findByMemberId(memberId).getMemberNo();
+
+        JjimDTO jjimDTO = JjimDTO.builder()
+                .recommend_contentid(contentid)
+                .memberNo(memberNo)
+                .build();
+
+        jjimRepository.save(JjimMapper.INSTANCE.toEntity(jjimDTO));
+    }
+
+    public void randomRecommendTourlist (String contentid){
+        //        String memberId = (String) session.getAttribute("id");
+        //        String memberNo = memberRepository.findByMemberId(memberId).getMemberNo();
+        System.out.println(contentid);
+
+        // 랜덤 테스트 코드
+        List<MemberDTO> memberDTOS = MemberMapper.INSTANCE.toDTOs(memberRepository.findAll());
+        Random ran = new Random();
+        System.out.println(memberDTOS.toString());
+
+
+        JjimDTO jjimDTO = JjimDTO.builder()
+                .recommend_contentid(contentid)
+                .memberNo(memberDTOS.get(ran.nextInt(10)).getMemberNo())
+                .build();
+
+        System.out.println(jjimDTO);
+
+        jjimRepository.save(JjimMapper.INSTANCE.toEntity(jjimDTO));
+    }
+
+    public void addTourlist(String contentid){
+        String memberId = (String) session.getAttribute("id");
+        String memberNo = memberRepository.findByMemberId(memberId).getMemberNo();
+
+    }
+
+}
