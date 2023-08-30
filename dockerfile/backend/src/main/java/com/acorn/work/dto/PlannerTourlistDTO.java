@@ -16,8 +16,9 @@ public class PlannerTourlistDTO {
         private String plannerNo;
 
         private String contentid;
-        private String  tourSeq;
 
-        private String  tourDay;
+        private String tourSeq;
+
+        private String tourDay;
     }
 

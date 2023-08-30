@@ -8,6 +8,8 @@
 
 /public/10.gif
 
+dockerfile/backend/data/traveldb.mv.db
+
 # Created by git when using merge tools for conflicts
 *.BACKUP.*
 *.BASE.*
