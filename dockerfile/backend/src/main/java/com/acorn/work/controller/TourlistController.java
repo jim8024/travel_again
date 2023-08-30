@@ -1,16 +1,14 @@
 package com.acorn.work.controller;
 
 import com.acorn.core.utils.ResponseUtils;
+import com.acorn.work.dto.TourlistConditionReqDTO;
 import com.acorn.work.service.TourlistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -52,5 +50,15 @@ public class TourlistController {
     public ResponseEntity getTourlistPageByTitle(@PathVariable String title,
                                           @PageableDefault(page=0, size=10)Pageable pageable) {
         return ResponseUtils.completed(tourlistService.getTourlistPageByTitle(title, pageable));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity getTourlistByCondition(@RequestBody TourlistConditionReqDTO tourlistConditionReqDTO, Pageable pageable) {
+        return ResponseUtils.completed(tourlistService.findTourlist(tourlistConditionReqDTO,pageable));
+    }
+
+    @GetMapping("/search/page")
+    public ResponseEntity getTourlistPageByCondition(@RequestBody TourlistConditionReqDTO tourlistConditionReqDTO, Pageable pageable){
+        return ResponseUtils.completed(tourlistService.findTourlistPage(tourlistConditionReqDTO,pageable));
     }
 }

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TourlistRepository extends JpaRepository<TourlistEntity, String > {
+public interface TourlistRepository extends JpaRepository<TourlistEntity, String >, TourlistCustomRepository {
     Page<TourlistEntity> findByAreacode(String areacode,Pageable pageable);
 
     List<TourlistEntity> findByTitleContains(String title, Pageable pageable);
     Page<TourlistEntity> findTourlistEntitiesByTitleContains(String title, Pageable pageable);
-    Page<TourlistEntity> findAll(Pageable pageable);
+//    Page<TourlistEntity> findAll(Pageable pageable);
 
 }
