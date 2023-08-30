@@ -32,7 +32,7 @@ public class MemberController {
 
     @PostMapping("/signin")
     public ResponseEntity signin(@RequestBody MemberDTO memberDTO){
-        memberService.signIn(memberDTO);
-        return ResponseUtils.completed(memberDTO.getMemberId());
+        String memberId = memberService.signIn(memberDTO);
+        return ResponseUtils.completed(memberId);
     }
 }
