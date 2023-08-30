@@ -61,4 +61,5 @@ public class TourlistController {
     public ResponseEntity getTourlistPageByCondition(@RequestBody TourlistConditionReqDTO tourlistConditionReqDTO, Pageable pageable){
         return ResponseUtils.completed(tourlistService.findTourlistPage(tourlistConditionReqDTO,pageable));
     }
+
 }

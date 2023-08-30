@@ -70,5 +70,4 @@ public class TourlistService {
     public Page<TourlistDTO> findTourlistPage(TourlistConditionReqDTO tourlistConditionReqDTO, Pageable pageable){
         return  tourlistRepository.findTourlistPage(tourlistConditionReqDTO,pageable);
     }
-
 }

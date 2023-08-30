@@ -32,7 +32,7 @@ public class PlannerController {
     }
 
     // memberId 에 해당하는 플래너 리스트(Page)
-    @GetMapping("/list/{memberId}")
+    @GetMapping("/list'/{memberId}")
     @ResponseBody
     public ResponseEntity plannerList(@PathVariable String memberId, Pageable pageable){
         System.out.println(memberId);

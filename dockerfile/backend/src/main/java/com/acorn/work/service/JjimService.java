@@ -6,6 +6,7 @@ import com.acorn.work.mapstruct.JjimMapper;
 import com.acorn.work.mapstruct.MemberMapper;
 import com.acorn.work.repository.JjimRepository;
 import com.acorn.work.repository.MemberRepository;
+import com.acorn.work.repository.TourlistRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ public class JjimService {
 
     private final MemberRepository memberRepository;
 
+    private final TourlistRepository tourlistRepository;
+
     private final HttpSession session;
 
     public void recommendTourlist (String contentid){
@@ -33,6 +36,8 @@ public class JjimService {
                 .build();
 
         jjimRepository.save(JjimMapper.INSTANCE.toEntity(jjimDTO));
+
+
     }
 
     public void randomRecommendTourlist (String contentid){
@@ -56,6 +61,7 @@ public class JjimService {
         jjimRepository.save(JjimMapper.INSTANCE.toEntity(jjimDTO));
     }
 
+    // 아직 미완성
     public void addTourlist(String contentid){
         String memberId = (String) session.getAttribute("id");
         String memberNo = memberRepository.findByMemberId(memberId).getMemberNo();
