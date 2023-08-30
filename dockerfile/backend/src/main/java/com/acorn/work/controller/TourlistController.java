@@ -1,16 +1,16 @@
 package com.acorn.work.controller;
 
 import com.acorn.core.utils.ResponseUtils;
-import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.service.TourlistService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -20,27 +20,18 @@ public class TourlistController {
 
     private final TourlistService tourlistService;
 
-    /**
-     * 전체 tourlist 목록
-     * @return List<TorulistDTO>
-     */
-    @GetMapping("/list")
-    public ResponseEntity getTourlist(){
-        List<TourlistDTO> tourlistDTOs = tourlistService.getTourlist();
-        return ResponseUtils.completed(tourlistDTOs);
+
+    // tourlist 전체 리스트 (page)
+    @GetMapping("/page")
+    public ResponseEntity getTourlist(Pageable pageable) {
+        return ResponseUtils.completed(tourlistService.getTourlistPage(pageable));
     }
 
-
-    /**
-     * areacode 에 대한 목록
-     * @param areacode
-     * @return List<TourlistDTO> where areacode = ?
-     */
-    @GetMapping("/area")
-    public ResponseEntity getTourlistFindByArea(String areacode) {
+    // tourlist by areacode 리스트 (page)
+    @GetMapping("/page/{areacode}")
+    public ResponseEntity getTourlistPageFindByAreacode(@PathVariable String areacode,Pageable pageable) {
         System.out.println(areacode);
-        List<TourlistDTO> tourlistDTOs = tourlistService.getTourlistOnArea(areacode);
-        return ResponseUtils.completed(tourlistDTOs);
+        return ResponseUtils.completed(tourlistService.getTourlistPageOnArea(areacode,pageable));
     }
 
     // recommend (추천수) 에 따라서 정렬
@@ -49,6 +40,17 @@ public class TourlistController {
 //        List<TourlistDTO> tourlistDTOS = tourlistService.getTourlistOrderBy
 //    }
 
+    // title 검색 리스트 (List)
+    @GetMapping("/{title}")
+    public ResponseEntity getTourlistByTitle(@PathVariable String title,
+                                      Pageable pageable) {
+        return ResponseUtils.completed(tourlistService.getTourlistByTitle(title, pageable));
+    }
 
-
+    // title 검색 리스트 (Page)
+    @GetMapping("/page/{title}")
+    public ResponseEntity getTourlistPageByTitle(@PathVariable String title,
+                                          @PageableDefault(page=0, size=10)Pageable pageable) {
+        return ResponseUtils.completed(tourlistService.getTourlistPageByTitle(title, pageable));
+    }
 }
