@@ -32,12 +32,6 @@ public class TourlistController {
         return ResponseUtils.completed(tourlistService.getTourlistPageOnAreacode(areacode,pageable));
     }
 
-    // recommend (추천수) 에 따라서 정렬
-//    @GetMapping("/byrec")
-//    public ResponseEntity getTourlistOrderByRec(){
-//        List<TourlistDTO> tourlistDTOS = tourlistService.getTourlistOrderBy
-//    }
-
     // title 검색 리스트 (List)
     @GetMapping("/{title}")
     public ResponseEntity getTourlistByTitle(@PathVariable String title,
