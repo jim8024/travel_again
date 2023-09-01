@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
+import BigMapItem from "../asset/BigMapItem";
 
 export default function BigMap(){
     return(
@@ -17,7 +17,7 @@ export default function BigMap(){
             </IconButton>
         </div>
         <div>
-  
+          <BigMapItem/>
         </div>
       </>
     )

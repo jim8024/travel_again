@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .modal {
@@ -30,6 +31,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    font-size: 30px;
 }
 
 .modal-content {
@@ -44,27 +46,38 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 15%;
+    height: 10%;
 }
 
 .modal-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
-    align-items: center;
+
 }
 
 .modal-text {
-    margin-top: -100px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
+.modal-icon{
+    display: flex;
+    justify-content: space-around;
+}
+
 .modal-image {
+    height: 355px;
+    max-height: 355px;
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .modal-image img {
     border-radius: 5%;
+    height: 100%;
+    width: 100%;
 }
