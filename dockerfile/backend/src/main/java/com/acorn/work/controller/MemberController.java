@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/member")
 @RequiredArgsConstructor
@@ -25,9 +28,12 @@ public class MemberController {
      */
     @PostMapping("/signup")
     public ResponseEntity signup(@RequestBody MemberDTO memberDTO){
-        System.out.println(memberDTO.toString());
-        memberService.signup(memberDTO);
-        return ResponseUtils.completed("memberId : " + memberDTO.getMemberId());
+
+        String memberNo = memberService.signup(memberDTO);
+        Map<String,String> memberMap = new HashMap<>();
+        memberMap.put("memberId",memberDTO.getMemberId());
+        memberMap.put("memberNo",memberNo);
+        return ResponseUtils.completed(memberMap);
     }
 
     @PostMapping("/signin")
