@@ -23,6 +23,8 @@ public class PlannerDTO {
 
     private String endDate;
 
+    private String localDateTime;
+
     private List<PlannerTourlistDTO> plannerTourlistDTOS;
 
 }

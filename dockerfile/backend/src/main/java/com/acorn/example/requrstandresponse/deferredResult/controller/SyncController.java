@@ -1,4 +1,4 @@
-package com.acorn.work.wersocket.deferredresult.controller;
+package com.acorn.example.requrstandresponse.deferredResult.controller;
 
 import com.acorn.core.utils.ResponseUtils;
 import lombok.extern.slf4j.Slf4j;

@@ -14,6 +14,7 @@ public interface TourlistRepository extends JpaRepository<TourlistEntity, String
 
     List<TourlistEntity> findByTitleContains(String title, Pageable pageable);
     Page<TourlistEntity> findTourlistEntitiesByTitleContains(String title, Pageable pageable);
-//    Page<TourlistEntity> findAll(Pageable pageable);
+
+
 
 }

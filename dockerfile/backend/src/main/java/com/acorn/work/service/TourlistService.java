@@ -22,7 +22,7 @@ public class TourlistService {
 
     private final TourlistCustomRepositoryImpl tourlistCustomRepository;
 
-    public ResponsePageDTO getTourlistPageOnArea(String areacode, Pageable pageable){
+    public ResponsePageDTO getTourlistPageOnAreacode(String areacode, Pageable pageable){
         Page<TourlistEntity> tourlistEntityPage= tourlistRepository.findByAreacode(areacode,pageable);
         System.out.println(tourlistEntityPage.getContent());
         return ResponsePageDTO.setResponsePageDTO(tourlistEntityPage);
@@ -70,5 +70,4 @@ public class TourlistService {
     public Page<TourlistDTO> findTourlistPage(TourlistConditionReqDTO tourlistConditionReqDTO, Pageable pageable){
         return  tourlistRepository.findTourlistPage(tourlistConditionReqDTO,pageable);
     }
-
 }

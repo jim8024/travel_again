@@ -45,10 +45,10 @@ public class PlannerService {
     public PlannerDTO plannerDetail(String plannerNo){
         // Optional -> plannerDTO
         PlannerDTO plannerDTO = PlannerMapper.INSTANCE.toDTO(plannerRepository.findByPlannerNo(plannerNo).get());
-//        System.out.println(plannerDTO);
+        System.out.println(plannerDTO);
         // Planner에 대한 상세정보 plannerTourlist
         List<PlannerTourlistDTO> plannerTourlistDTOS = PlannerTourlistMapper.INSTANCE.toDTOs(plannerTourlistRepository.findByPlannerNo(plannerNo));
-//        System.out.println(plannerTourlistDTOS);
+        System.out.println(plannerTourlistDTOS);
         plannerDTO.setPlannerTourlistDTOS(plannerTourlistDTOS);
 
         return plannerDTO;

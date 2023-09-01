@@ -93,7 +93,7 @@ public class TourlistCustomRepositoryImpl implements TourlistCustomRepository {
                 qTourlistEntity.mapy );
     }
 
-    private ConstructorExpression<TourlistDTO> makeProjectiosConstructor() {
+    private ConstructorExpression<TourlistDTO>  makeProjectiosConstructor() {
         return Projections.constructor(TourlistDTO.class, qTourlistEntity);
     }
 
@@ -102,7 +102,7 @@ public class TourlistCustomRepositoryImpl implements TourlistCustomRepository {
         return new BooleanBuilder(ExpressionUtils.allOf(titleContains(tourCondition.getTitle()),
                 addr1Contains(tourCondition.getAddr1()),
                 sigungucodeContains(tourCondition.getSigungucode())
-        ) );
+        ));
 
     }
 
@@ -123,6 +123,5 @@ public class TourlistCustomRepositoryImpl implements TourlistCustomRepository {
                 qTourlistEntity.addr1.contains(value) :
                 null;
     }
-
 
 }

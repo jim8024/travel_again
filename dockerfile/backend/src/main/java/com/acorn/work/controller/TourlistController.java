@@ -20,16 +20,16 @@ public class TourlistController {
 
 
     // tourlist 전체 리스트 (page)
-    @GetMapping("/page")
+    @GetMapping("/list")
     public ResponseEntity getTourlist(Pageable pageable) {
         return ResponseUtils.completed(tourlistService.getTourlistPage(pageable));
     }
 
     // tourlist by areacode 리스트 (page)
-    @GetMapping("/page/{areacode}")
+    @GetMapping("/list/{areacode}")
     public ResponseEntity getTourlistPageFindByAreacode(@PathVariable String areacode,Pageable pageable) {
         System.out.println(areacode);
-        return ResponseUtils.completed(tourlistService.getTourlistPageOnArea(areacode,pageable));
+        return ResponseUtils.completed(tourlistService.getTourlistPageOnAreacode(areacode,pageable));
     }
 
     // recommend (추천수) 에 따라서 정렬
