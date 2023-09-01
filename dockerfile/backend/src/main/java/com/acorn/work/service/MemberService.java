@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    public void signup(MemberDTO memberDTO) {
+    public String signup(MemberDTO memberDTO) {
         memberRepository.save(MemberMapper.INSTANCE.toEntity(memberDTO));
+        String memberNo = memberRepository.findByMemberId(memberDTO.getMemberId()).getMemberNo();
+        return memberNo;
     }
 
     public String signIn(MemberDTO memberDTO) {

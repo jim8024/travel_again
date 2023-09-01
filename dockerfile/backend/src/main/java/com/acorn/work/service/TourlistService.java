@@ -1,9 +1,11 @@
 package com.acorn.work.service;
 
 import com.acorn.core.common.dto.ResponsePageDTO;
+import com.acorn.work.dto.TourlistConditionReqDTO;
 import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.entity.TourlistEntity;
 import com.acorn.work.mapstruct.TourlistMapper;
+import com.acorn.work.repository.TourlistCustomRepositoryImpl;
 import com.acorn.work.repository.TourlistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,7 +20,9 @@ public class TourlistService {
 
     private final TourlistRepository tourlistRepository;
 
-    public ResponsePageDTO getTourlistPageOnArea(String areacode, Pageable pageable){
+    private final TourlistCustomRepositoryImpl tourlistCustomRepository;
+
+    public ResponsePageDTO getTourlistPageOnAreacode(String areacode, Pageable pageable){
         Page<TourlistEntity> tourlistEntityPage= tourlistRepository.findByAreacode(areacode,pageable);
         System.out.println(tourlistEntityPage.getContent());
         return ResponsePageDTO.setResponsePageDTO(tourlistEntityPage);
@@ -56,5 +60,14 @@ public class TourlistService {
     public ResponsePageDTO getTourlistPageByTitle(String title, Pageable pageable) {
         Page<TourlistEntity> tourlistEntityPage = tourlistRepository.findTourlistEntitiesByTitleContains(title, pageable);
         return ResponsePageDTO.setResponsePageDTO(tourlistEntityPage);
+    }
+
+
+    public List<TourlistDTO> findTourlist(TourlistConditionReqDTO tourlistConditionReqDTO,Pageable pageable) {
+        return tourlistRepository.findTourlist(tourlistConditionReqDTO);
+    }
+
+    public Page<TourlistDTO> findTourlistPage(TourlistConditionReqDTO tourlistConditionReqDTO, Pageable pageable){
+        return  tourlistRepository.findTourlistPage(tourlistConditionReqDTO,pageable);
     }
 }

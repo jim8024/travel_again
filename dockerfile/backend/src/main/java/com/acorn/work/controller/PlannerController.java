@@ -40,12 +40,16 @@ public class PlannerController {
     }
 
     // 플래너 상세정보
-    @GetMapping("")
+    @GetMapping("/{plannerNo}")
     @ResponseBody
-    public ResponseEntity plannerDetail(@RequestParam String plannerNo){
+    public ResponseEntity plannerDetail(@PathVariable String plannerNo){
         PlannerDTO plannerDTO = plannerService.plannerDetail(plannerNo);
         return ResponseUtils.completed(plannerDTO);
     }
 
+    @GetMapping("/soc")
+    public String soc(){
+        return "/websocket/index.html";
+    }
 
 }
