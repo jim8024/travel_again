@@ -41,4 +41,6 @@ public class MemberController {
         String memberId = memberService.signIn(memberDTO);
         return ResponseUtils.completed(memberId);
     }
+
+
 }

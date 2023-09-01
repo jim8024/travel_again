@@ -47,5 +47,9 @@ public class PlannerController {
         return ResponseUtils.completed(plannerDTO);
     }
 
+    @GetMapping("/soc")
+    public String soc(){
+        return "/websocket/index.html";
+    }
 
 }

@@ -1,8 +1,8 @@
-package com.acorn.demo.requrstandresponse.websocketStomp.controller;
+package com.acorn.example.requrstandresponse.websocketStomp.controller;
 
 import com.acorn.core.utils.UuidUtils;
-import com.acorn.demo.requrstandresponse.websocketStomp.message.GreetingMessag;
-import com.acorn.demo.requrstandresponse.websocketStomp.message.HelloMessage;
+import com.acorn.example.requrstandresponse.websocketStomp.message.GreetingMessag;
+import com.acorn.example.requrstandresponse.websocketStomp.message.HelloMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;

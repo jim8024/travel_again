@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import CardContent from '@mui/material/CardContent';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,15 +9,9 @@ import StarIcon from '@mui/icons-material/Star';
 import output from '../finalresult.json';
 import { textOverCut } from './textOverCut.js';
 
-export default function TourCard({ setSelectedItems}) {
-    const [day, setDay] = useState([]);
-    
-
+export default function TourCard({ setSelectedItems }) {
     const handleAddButtonClick = (item) => {
-        
-        setDay((choiceItems) => [...choiceItems , item])
-        setSelectedItems((choiceItems) => [...choiceItems, item])
-        console.log(day)
+        setSelectedItems((choiceItems) => [...choiceItems, item]);
     };
 
     return (

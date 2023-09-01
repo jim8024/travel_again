@@ -1,4 +1,4 @@
-package com.acorn.demo.requrstandresponse.websocketStomp.message;
+package com.acorn.example.requrstandresponse.websocketStomp.message;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GreetingMessag {
-  @JsonProperty("content")
-  private String content;
+public class HelloMessage {
+  @JsonProperty("name")
+  private String name;
 }

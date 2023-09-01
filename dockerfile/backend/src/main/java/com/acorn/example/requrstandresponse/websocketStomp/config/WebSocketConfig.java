@@ -1,4 +1,4 @@
-package com.acorn.demo.requrstandresponse.websocketStomp.config;
+package com.acorn.example.requrstandresponse.websocketStomp.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
