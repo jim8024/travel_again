@@ -4,6 +4,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "../css/OutLineForm.css";
 import OutLineTable from "./OutLineTable";
+import  SideMapItem from "../asset/SideMapItem";
 
 export default function OutLineForm() {
   return (
@@ -27,7 +28,7 @@ export default function OutLineForm() {
               <ArrowForwardIosIcon sx={{ color: "#EEEEEE" }} />
             </IconButton>
           </div>
-          
+            <SideMapItem />
           <div className="map-footer">
                 <div class="number-list">
                     <p className="number-icon">1</p>
