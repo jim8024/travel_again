@@ -14,8 +14,17 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import ko from 'date-fns/locale/ko';
 
-function DatePicker({ selectedItems, setSelectedItems }) {
+function DatePicker({ selectedItems, setSelectedIndex, setSelectedItems }) {
     const MAX_DATE = 5;
+
+    // useState를 사용하여 snackbarOpen 상태와 setSnackbarOpen 함수를 정의
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+    // handleSnackbarClose 함수 정의
+    const handleSnackbarClose = (event, reason) => {
+        if (reason !== 'clickaway') setSnackbarOpen(false);
+    };
+    const handleSnackbarOpen = () => setSnackbarOpen(true);
 
     const [state, setState] = useState([
         {
@@ -26,17 +35,16 @@ function DatePicker({ selectedItems, setSelectedItems }) {
     ]);
 
     const [expanded, setExpanded] = useState('panel0');
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [accordions, setAccordions] = useState([]);
 
-    const handleChange = (panel) => (event, newExpanded) => {
-        setExpanded(newExpanded ? panel : false);
-    };
-
-    const handleSnackbarOpen = () => setSnackbarOpen(true);
-    const handleSnackbarClose = (event, reason) => {
-        if (reason !== 'clickaway') setSnackbarOpen(false);
-    };
+    const handleChange = useCallback(
+        (panel) => (event, newExpanded) => {
+            setExpanded(newExpanded ? panel : false);
+            const index = panel.slice(-1);
+            setSelectedIndex(index);
+        },
+        [setSelectedIndex]
+    );
 
     const createAccordions = useCallback(
         (startDate, endDate) => {
@@ -44,7 +52,26 @@ function DatePicker({ selectedItems, setSelectedItems }) {
             const dayInMillis = 24 * 60 * 60 * 1000;
             const dateRangeInDays = (endDate - startDate) / dayInMillis + 1;
 
+            const dateCards = [];
+
+            for (let i = 0; i < dateRangeInDays; i++) {
+                dateCards.push([]); // 각 날짜에 대한 빈 배열 생성
+            }
+
+            for (let i = 0; i < dateRangeInDays; i++) {
+                const cardProps = {
+                    selectedItems: selectedItems[i] || [], // 빈 배열을 기본값으로 설정
+                    day: i + 1,
+                    setSelectedItems: setSelectedItems,
+                };
+
+                const cardsForDate = [];
+                cardsForDate.push(<AppendCard key={i} {...cardProps} />);
+                dateCards[i] = cardsForDate; // 해당 날짜의 배열에 카드 추가
+            }
+
             if (dateRangeInDays > MAX_DATE) {
+                // handleSnackbarOpen 함수를 사용하여 스낵바를 열도록 수정
                 handleSnackbarOpen();
             } else {
                 for (let i = 0; i < dateRangeInDays; i++) {
@@ -57,20 +84,14 @@ function DatePicker({ selectedItems, setSelectedItems }) {
                             >
                                 <Typography>DAY {i + 1}</Typography>
                             </AccordionSummary>
-                            <AccordionDetails style={{ padding: 0 }}>
-                                <AppendCard
-                                    selectedItems={selectedItems}
-                                    setSelectedItems={setSelectedItems}
-                                    day={i + 1}
-                                />
-                            </AccordionDetails>
+                            <AccordionDetails style={{ padding: 0 }}>{dateCards[i]}</AccordionDetails>
                         </Accordion>
                     );
                 }
             }
             return accordions;
         },
-        [expanded, selectedItems, setSelectedItems]
+        [expanded, selectedItems, handleChange, setSelectedItems]
     );
 
     useEffect(() => {
@@ -81,7 +102,7 @@ function DatePicker({ selectedItems, setSelectedItems }) {
             const newAccordions = createAccordions(startDate, endDate);
             setAccordions(newAccordions);
         }
-    }, [state, expanded, selectedItems, createAccordions, setSelectedItems]);
+    }, [state, createAccordions]);
 
     return (
         <div>
@@ -104,7 +125,6 @@ function DatePicker({ selectedItems, setSelectedItems }) {
             <h3>선택한 여행지</h3>
             <hr />
             {accordions}
-            {/* 일정이 5일을 초과하면 경고창 띄우기 */}
             <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={4000}
