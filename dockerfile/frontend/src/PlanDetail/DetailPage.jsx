@@ -1,17 +1,21 @@
-import { Grid } from "@mui/material";
+// 플래너 디테일 페이지
+import { Grid, IconButton } from "@mui/material";
 import React from "react";
 import "./css/DetailPage.css";
 import Tabs from "./Tabs";
 
-
 export default function DetailPage() {
+  // 로컬 데이터 필요
+  // 필요 목록 title, locImage, location, date, day
   return (
     <div className="detail-page-container">
       <Grid item className="image-container" sx={{ margin: "auto" }}>
         <p className="font-kor" style={{ zIndex: "1" }}>
+          {/* korTitle */}
           대한민국 서울
         </p>
         <p className="font-eng" style={{ zIndex: "1" }}>
+          {/* engTitle */}
           SEOUL
         </p>
         <img
