@@ -1,3 +1,4 @@
+//지도 구현 테이블
 import React from "react";
 import { IconButton } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -17,6 +18,7 @@ export default function BigMap(){
             </IconButton>
         </div>
         <div>
+          {/* 지도 */}
           <BigMapItem/>
         </div>
       </>
