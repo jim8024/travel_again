@@ -6,7 +6,7 @@ import TourSort from "./TourSort";
 import TourList from "./TourList";
 import TourFilterSidebar from "./TourFilterSidebar";
 // mock
-import tourjson from "../../../trip.json"
+import tourjson from "../../../utils/trip.json"
 
 // ----------------------------------------------------------------------
 
