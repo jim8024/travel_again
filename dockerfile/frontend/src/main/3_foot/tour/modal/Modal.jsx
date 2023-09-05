@@ -4,7 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CloseIcon from '@mui/icons-material/Close';
-import tourjson from "../../../../trip.json"
+import tourjson from "../../../../utils/trip.json"
 import { Link } from 'react-router-dom';
 
 const Modal = ({ isOpen, onClose, areacode }) => {
