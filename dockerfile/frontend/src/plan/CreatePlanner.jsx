@@ -21,7 +21,6 @@ function CreatePlanner() {
     const areaData = location.state ? location.state.areaData : null;
     //날짜 시작일, 종료일 구하는 함수 => DatePicker
 
-    console.log(areaData);
     const checkingSDate = (i) => {
         setStartDate(i)
     };
@@ -76,6 +75,8 @@ function CreatePlanner() {
                             checkingSDate={checkingSDate}
                             checkingEDate={checkingEDate}
                         />
+                        <h3>선택된 여행지</h3>
+                        <hr />
                         <DateAccordion
                             dateLength={dateLength}
                             setSelectedItems={setSelectedItems}
@@ -98,7 +99,7 @@ function CreatePlanner() {
                 </Grid>
             </div>
             <div className="planBtn">
-                <Link to={"/plan/detail"} state={{areaData:areaData}}>
+                <Link to={"/plan/detail"} state={{areaData:areaData, selectedItems:selectedItems}}>
                     <Button variant="contained" sx={{ backgroundColor: '#8181F7' }} onClick={sendData}>
                         일정 생성하기
                     </Button>
