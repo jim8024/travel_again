@@ -7,9 +7,7 @@ import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import DateTableBody from "./DateTableBody";
 export default function DateTable(){
-    async function tableData(){
-        
-    }
+   
     return(
         <div className="table-container">    
             <table>
