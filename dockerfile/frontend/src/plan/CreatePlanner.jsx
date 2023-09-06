@@ -3,11 +3,11 @@ import './css/CreatePlanner.css';
 import Map from './Map';
 import PlanCard from './PlanCard';
 import { Button, Grid } from '@mui/material';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import DateAccordion from './date/DateAccordion';
 import DateAlert from './date/DateAlert';
 import DatePicker from './date/DatePicker';
-// import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 function CreatePlanner() {
     const [dateLength, setDateLength] = useState(0);
@@ -21,17 +21,45 @@ function CreatePlanner() {
 
     console.log(areaData);
     const checkingSDate = (i) => {
-        console.log(i);
+        return i;
     };
     const checkingEDate = (i) => {
-        console.log(i);
+        return i;
     };
 
     const handleDateChange = (dateArray) => {
         setDateLength(dateArray.length);
     };
-    console.log(selectedItems);
 
+    const convertDay = (array) => {
+        let obj = [];
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < array[i].length; j++) {
+                let arr = [];
+                arr.contentid = array[i][j].contentid;
+                arr.tourDay = i + 1;
+                arr.tourSeq = j + 1;
+                obj.push(arr);
+            }
+        }
+        return obj;
+    };
+
+    const sendData = async () => {
+        try {
+            const dataToSend = {
+                checkingSDate: checkingSDate(),
+                checkingEDate: checkingEDate(),
+                convertDayData: convertDay(selectedItems),
+            };
+
+            const response = await axios.post('#', dataToSend);
+
+            console.log('서버응답', response.data);
+        } catch (error) {
+            console.error('오류', error);
+        }
+    };
     return (
         <>
             <div className="plan-header">
@@ -69,7 +97,7 @@ function CreatePlanner() {
             </div>
             <div className="planBtn">
                 <Link to="/plan/detail">
-                    <Button variant="contained" sx={{ backgroundColor: '#8181F7' }}>
+                    <Button variant="contained" sx={{ backgroundColor: '#8181F7' }} onClick={sendData}>
                         일정 생성하기
                     </Button>
                 </Link>
