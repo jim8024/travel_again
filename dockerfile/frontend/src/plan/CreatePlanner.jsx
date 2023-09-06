@@ -13,6 +13,8 @@ function CreatePlanner() {
     const [dateLength, setDateLength] = useState(0);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [selectedItems, setSelectedItems] = useState([]);
+    const [startDate , setStartDate] = useState(0);
+    const [endDate , setEndDate] = useState(0);
 
     const location = useLocation();
     //console.log(location);
@@ -21,10 +23,10 @@ function CreatePlanner() {
 
     console.log(areaData);
     const checkingSDate = (i) => {
-        return i;
+        setStartDate(i)
     };
     const checkingEDate = (i) => {
-        return i;
+        setEndDate(i)
     };
 
     const handleDateChange = (dateArray) => {
@@ -48,8 +50,8 @@ function CreatePlanner() {
     const sendData = async () => {
         try {
             const dataToSend = {
-                checkingSDate: checkingSDate(),
-                checkingEDate: checkingEDate(),
+                startDate: startDate,
+                endDate: endDate,
                 convertDayData: convertDay(selectedItems),
             };
 
@@ -96,7 +98,7 @@ function CreatePlanner() {
                 </Grid>
             </div>
             <div className="planBtn">
-                <Link to="/plan/detail">
+                <Link to={"/plan/detail"} state={{areaData:areaData}}>
                     <Button variant="contained" sx={{ backgroundColor: '#8181F7' }} onClick={sendData}>
                         일정 생성하기
                     </Button>
