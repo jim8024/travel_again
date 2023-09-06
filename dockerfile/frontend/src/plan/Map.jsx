@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import './Map.css';
-import { textOverCut } from './textOverCut.js';
+import { textOverCut } from '../util/textOverCut';
 
-function Map({ selectedItems }) {
+function Map({ selectedItems, areaData }) {
     useEffect(() => {
         const { kakao } = window;
         const container = document.getElementById('map');
 
         const options = {
-            center: new kakao.maps.LatLng(37.4987464, 127.03169),
-            level: 9,
+            center: new kakao.maps.LatLng(areaData.mapy, areaData.mapx),
+            level: areaData.mlevel,
         };
         const map = new kakao.maps.Map(container, options);
 
@@ -107,7 +107,7 @@ function Map({ selectedItems }) {
         window.closeOverlay = function (index) {
             overlays[index].setMap(null);
         };
-    }, [selectedItems]);
+    }, [selectedItems, areaData.mapx, areaData.mapy, areaData.mlevel]);
 
     return (
         <div

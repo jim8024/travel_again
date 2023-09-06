@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Button, Card } from '@mui/material';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import StarIcon from '@mui/icons-material/Star';
-import { textOverCut } from './textOverCut.js';
+import { textOverCut } from '../util/textOverCut';
 
 export default function AppendCard({ selectedItems, setSelectedItems }) {
     const removeBtnClick = (itemToRemove) => {
