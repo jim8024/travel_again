@@ -6,7 +6,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import  SideMapItem from "../asset/SideMapItem";
 import "../css/OutLineForm.css";
 import OutLineTable from "./OutLineTable";
-import { axios } from "axios";
+import  axios  from "axios";
 
 export default function OutLineForm() {
   // 백 데이터 필요
