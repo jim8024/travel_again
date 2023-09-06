@@ -1,9 +1,13 @@
 //일정페이지 내용
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useLocation } from "react-router";
 
 export default function DateTableBody(){
     const [data, setData] = useState([]);
+    const location = useLocation();
+    console.log(location);
+    const areaData = location.state ? location.state.areaData : null;
     const fetchData = async () => {
         try {
           const response = await axios.get("#");
@@ -26,12 +30,12 @@ export default function DateTableBody(){
                         </td>
                         <td>
                             <ul className="circle-ul">
-                                <li>{item.location}</li>
+                                <li>{areaData.korTitle}</li>
                             </ul>
                         </td>
                         <td>
                             <ul className="number-ul">
-                                <li></li>
+                                <li>{areaData.engTitle}</li>
                         </ul>
                     </td>
                     <td>
