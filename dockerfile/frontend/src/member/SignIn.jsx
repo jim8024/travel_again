@@ -10,9 +10,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { yellow, green } from '@mui/material/colors';
+// import { yellow, green } from '@mui/material/colors';
 import { Divider, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import axios from 'axios';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -22,14 +23,22 @@ export default function SignIn() {
     const [showPassword, setShowPassword] = React.useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleSubmit = (event) => {
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        // ------------ 나중에 서버랑 연결할 때 주석제거하기 ---------------------------
+        // const data = new FormData(event.currentTarget);
+        // try {
+        //     const response = await axios.post('여기에 서버 주소', {
+        //         email: data.get('email'),
+        //         password: data.get('password'),
+        //     });
+        //     console.log('서버 응답:', response.data);
+        // } catch (error) {
+        //     console.error('오류:', error);
+        // }
     };
+
     //아이디 보내야함 플래너페이지, 아이디 대조
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -51,11 +60,11 @@ export default function SignIn() {
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField margin="normal" required fullWidth id="id" label="아이디" name="id" autoFocus />
-
                         <FormControl fullWidth variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-password">비밀번호</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"
+                                name="password"
                                 type={showPassword ? 'text' : 'password'}
                                 endAdornment={
                                     <InputAdornment position="end">
@@ -88,7 +97,7 @@ export default function SignIn() {
                                 </Link>
                             </Grid>
                         </Grid>
-                        <Grid container sx={{ mt: 3 }} justifyContent="space-between">
+                        {/* <Grid container sx={{ mt: 3 }} justifyContent="space-between">
                             <Button type="submit" variant="contained">
                                 구글 로그인
                             </Button>
@@ -98,7 +107,7 @@ export default function SignIn() {
                             <Button type="submit" variant="contained" style={{ backgroundColor: green[500] }}>
                                 네이버 로그인
                             </Button>
-                        </Grid>
+                        </Grid> */}
                     </Box>
                 </Box>
             </Container>
