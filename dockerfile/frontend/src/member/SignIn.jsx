@@ -30,7 +30,7 @@ export default function SignIn() {
             password: data.get('password'),
         });
     };
-
+    //아이디 보내야함 플래너페이지, 아이디 대조
     return (
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
