@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardContent from '@mui/material/CardContent';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CardMedia from '@mui/material/CardMedia';
@@ -8,23 +8,47 @@ import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 import StarIcon from '@mui/icons-material/Star';
 import output from '../utils/finalresult.json';
 import { textOverCut } from '../util/textOverCut';
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function PlanCard({ selectedItems, setSelectedItems, selectedIndex, areaData }) {
+    const [tourList, setTourList] = useState([]);
+
+    useEffect(() => {
+        // API에서 데이터를 가져오는 함수
+        async function fetchData() {
+            try {
+                // 테스트 코드입니다
+                // const response = await fetch('http://localhost:3001/items'); // TODO : 서버쪽 데이터 들고오기
+                // if (!response.ok) {
+                //     throw new Error('네트워크 응답이 올바르지 않습니다');
+                // }
+                // const jsonData = await response.json();
+                setTourList(output); // TODO : 여기도 실제 데이터 들어올 때는 수정하기
+            } catch (error) {
+                console.error('데이터를 불러오는 중 오류 발생:', error);
+            }
+        }
+        // fetchData 함수 호출
+        fetchData();
+    }, []);
+
     const handleAddButtonClick = (item) => {
         const selectedDate = new Date().toISOString().substr(0, 10);
 
-        let updatedArray = [...selectedItems];
+        let updatedSelectedItems = [...selectedItems];
 
-        // updatedArray[selectedIndex]가 배열이 아니거나 null 또는 undefined일 때 초기화
-        if (!Array.isArray(updatedArray[selectedIndex])) {
-            updatedArray[selectedIndex] = [];
+        // updatedSelectedItems[selectedIndex]가 배열이 아니거나 null 또는 undefined일 때 초기화
+        if (!Array.isArray(updatedSelectedItems[selectedIndex])) {
+            updatedSelectedItems[selectedIndex] = [];
         }
 
-        updatedArray[selectedIndex].push({ ...item, date: selectedDate });
-        setSelectedItems(updatedArray);
+        updatedSelectedItems[selectedIndex].push({ ...item, date: selectedDate });
+        setSelectedItems(updatedSelectedItems);
+
+        // 선택된 항목을 tourList 배열에서 제거
+        const updatedTourList = tourList.filter((dataItem) => dataItem.contentid !== item.contentid);
+        setTourList(updatedTourList);
     };
 
     const itemsPerPage = 8;
@@ -45,7 +69,7 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
         }
     };
 
-    const filteredItems = output.filter((item) => item.areacode === areaData.areacode);
+    const filteredItems = tourList.filter((item) => item.areacode === areaData.areacode);
     const displayedItems = filteredItems.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
     return (
@@ -90,8 +114,8 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
                         <Typography variant="div">
                             <span
                                 style={{
-                                    fontSize: '1px',
-                                    fontWeight: 'bolder',
+                                    fontSize: '12px',
+                                    fontWeight: 'bold',
                                     color: 'skyblue',
                                     marginTop: '-2',
                                 }}
@@ -131,20 +155,18 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
                     </div>
                 </Card>
             ))}
-           <div style={{display:"flex", justifyContent:"space-between"}}>
-              <Button onClick={handlePreviousPage} disabled={currentPage === 0}>
-                {" "}
-                <ArrowBackIosNewIcon />
-              </Button>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Button onClick={handlePreviousPage} disabled={currentPage === 0}>
+                    {' '}
+                    <ArrowBackIosNewIcon />
+                </Button>
 
-              <Button
-                onClick={handleNextPage}
-                disabled={
-                  currentPage === Math.ceil(filteredItems.length / itemsPerPage) - 1
-                }
-              >
-                <ArrowForwardIosIcon />
-              </Button>
+                <Button
+                    onClick={handleNextPage}
+                    disabled={currentPage === Math.ceil(filteredItems.length / itemsPerPage) - 1}
+                >
+                    <ArrowForwardIosIcon />
+                </Button>
             </div>
         </>
     );
