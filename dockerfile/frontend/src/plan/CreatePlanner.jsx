@@ -8,13 +8,16 @@ import DateAccordion from './date/DateAccordion';
 import DateAlert from './date/DateAlert';
 import DatePicker from './date/DatePicker';
 import axios from 'axios';
+import { format } from 'date-fns';
+import ko from 'date-fns/locale/ko';
+import { DateRange } from '@mui/icons-material';
 
 function CreatePlanner() {
     const [dateLength, setDateLength] = useState(0);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [selectedItems, setSelectedItems] = useState([]);
-    const [startDate , setStartDate] = useState(0);
-    const [endDate , setEndDate] = useState(0);
+    const [startDate, setStartDate] = useState(0);
+    const [endDate, setEndDate] = useState(0);
 
     const location = useLocation();
     //console.log(location);
@@ -22,11 +25,14 @@ function CreatePlanner() {
     //날짜 시작일, 종료일 구하는 함수 => DatePicker
 
     const checkingSDate = (i) => {
-        setStartDate(i)
+        setStartDate(i);
     };
     const checkingEDate = (i) => {
-        setEndDate(i)
+        setEndDate(i);
     };
+
+    const formattedStartDate = startDate ? format(startDate, 'yyyy-MM-dd EEEE', { locale: ko }) : '';
+    const formattedEndDate = endDate ? format(endDate, 'yyyy-MM-dd EEEE', { locale: ko }) : '';
 
     const handleDateChange = (dateArray) => {
         setDateLength(dateArray.length);
@@ -49,8 +55,8 @@ function CreatePlanner() {
     const sendData = async () => {
         try {
             const dataToSend = {
-                startDate: startDate,
-                endDate: endDate,
+                startDate: formattedStartDate,
+                endDate: formattedEndDate,
                 convertDayData: convertDay(selectedItems),
             };
 
@@ -61,6 +67,7 @@ function CreatePlanner() {
             console.error('오류', error);
         }
     };
+
     return (
         <>
             <div className="plan-header">
@@ -99,7 +106,15 @@ function CreatePlanner() {
                 </Grid>
             </div>
             <div className="planBtn">
-                <Link to={"/plan/detail"} state={{areaData:areaData, selectedItems:selectedItems}}>
+                <Link
+                    to={'/plan/detail'}
+                    state={{
+                        areaData: areaData,
+                        selectedItems: selectedItems,
+                        startDate: formattedStartDate,
+                        endDate: formattedEndDate,
+                    }}
+                >
                     <Button variant="contained" sx={{ backgroundColor: '#8181F7' }} onClick={sendData}>
                         일정 생성하기
                     </Button>
