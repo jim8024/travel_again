@@ -28,7 +28,7 @@ public class controller {
   // @SendTo : 메시지를 보낼 대상을 지정.
   //        대상은 토픽(topic)이나 큐(queue)의 형태로 지정할 수 있습니다.
   @MessageMapping("/scheduledmsg")
-  @SendTo("/topic/message")
+  @SendTo("/topic/message2")
   public GreetingMessag connect(HelloMessage message) throws Exception {
     Thread.sleep(1000); // simulated delay
     return GreetingMessag.builder()

@@ -23,11 +23,11 @@ public class MemberService {
         MemberEntity memberEntityIdPwd = memberRepository.findByMemberIdAndPwd(memberDTO.getMemberId(), memberDTO.getPwd());
 
         if (memberEntityId == null){
-            return "아이디가 없습니다";
+            return "login fail : 아이디가 없습니다";
         } else if (memberEntityIdPwd == null) {
-            return "비밀번호가 틀렸습니다";
+            return "login fail : 비밀번호가 틀렸습니다";
         } else {
-            return memberEntityId.getMemberId();
+            return "login success id : " + memberEntityId.getMemberId();
         }
 
     }

@@ -8,4 +8,8 @@ public class UuidUtils {
     String uuid = String.valueOf(Generators.timeBasedEpochGenerator().generate());
     return uuid.replaceAll("-", "");
   }
+  public static int getRandom(int max, int min) {
+    double random = Math.random();
+    return (int)(random * max) + min;
+  }
 }
