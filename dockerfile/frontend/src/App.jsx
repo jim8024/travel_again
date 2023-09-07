@@ -1,8 +1,8 @@
-import Main from "./main/head/Main"
-import HowTo from "./main/body/HowTo"
-import Carousel from "./main/body/Carousel";
-import WhereToGo from "./main/Foot/WhereToGo";
-import TourListPage from "./main/Foot/tour/TourListPage";
+import Main from "./main/1_head/Main"
+import HowTo from "./main/2_body/HowTo"
+import Carousel from "./main/2_body/Carousel";
+import WhereToGo from "./main/3_foot/WhereToGo"
+import TourListPage from "./main/3_foot/tour/TourListPage";
 function App() {
     return(
         <>

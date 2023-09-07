@@ -54,7 +54,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
-
 }
 
 .modal-text {
@@ -62,9 +61,16 @@
     padding-right: 10px;
 }
 
-.modal-icon{
+.modal-text > h3 {
+    text-align: start;
+    margin-left: 0px;
+    margin-top: -5px;
+}
+
+.modal-icon {
     display: flex;
     justify-content: space-around;
+    margin-top: 5px;
 }
 
 .modal-image {
@@ -73,11 +79,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .modal-image img {
     border-radius: 5%;
     height: 100%;
-    width: 100%;
+    width: 90%;
 }
