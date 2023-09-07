@@ -1,24 +1,26 @@
-// import React, { useState } from 'react';
 import CardContent from '@mui/material/CardContent';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, Card } from '@mui/material';
-import StarIcon from '@mui/icons-material/Star';
-import { textOverCut } from './textOverCut.js';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
+import StarIcon from '@mui/icons-material/Star';
+import { textOverCut } from '../util/textOverCut';
 
 export default function AppendCard({ selectedItems, setSelectedItems }) {
-    const removeBtnClick = (item) => {
-        const updatedItems = selectedItems.filter((i) => i.contentid !== item.contentid);
-        setSelectedItems(updatedItems);
+    const removeBtnClick = (itemToRemove) => {
+        // 선택한 항목을 제외한 나머지 항목들을 유지하는 방법으로 필터링
+        const updatedItems = selectedItems.filter((item) => item.contentid !== itemToRemove.contentid);
+        setSelectedItems([updatedItems]);
     };
+
+    const itemsToDisplay = selectedItems || [];
 
     return (
         <>
-            {selectedItems.map((item, index) => (
+            {itemsToDisplay.map((item, index) => (
                 <Card
-                    key={index}
+                    key={item.contentid}
                     sx={{
                         display: 'flex',
                         width: 'auto',
@@ -30,7 +32,13 @@ export default function AppendCard({ selectedItems, setSelectedItems }) {
                 >
                     <CardMedia
                         component="img"
-                        sx={{ width: 70, height: 70, flexGrow: '1', borderRadius: '5px', marginLeft: '10px' }}
+                        sx={{
+                            width: 70,
+                            height: 70,
+                            flexGrow: '1',
+                            borderRadius: '5px',
+                            marginLeft: '10px',
+                        }}
                         image={item.firstimage}
                     />
                     <CardContent sx={{ position: 'static', flexGrow: '5' }}>

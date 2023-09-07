@@ -19,6 +19,7 @@ import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
+import axios from 'axios';
 
 const theme = createTheme({
     overrides: {
@@ -35,19 +36,33 @@ export default function SignUp() {
     const [showPassword2, setShowPassword2] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
+    const [selectedDate, setSelectedDate] = React.useState(null);
 
-    const handleSubmit = (event) => {
+    // 데이트피커에서 날짜가 선택될 때 호출되는 함수
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+    };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            name: data.get('name'),
-            id: data.get('id'),
-            password: data.get('password'),
-            email: data.get('email'),
-            phone: data.get('phone'),
-            birth: data.get('birth'),
-            gender: data.get('gender'),
-        });
+        // ------------ 나중에 서버랑 연결할 때 주석제거하기 ---------------------------
+        // const data = new FormData(event.currentTarget);
+        // try {
+        //     const response = await axios.post('여기에 서버 주소', {
+        //         name: data.get('name'),
+        //         id: data.get('id'),
+        //         password: data.get('password'),
+        //         email: data.get('email'),
+        //         phone: data.get('phone'),
+        //         birth: data.get('birth'),
+        //         gender: data.get('row-radio-buttons-group'),
+        //     });
+        //     // 서버 응답 처리
+        //     console.log('서버 응답:', response.data);
+        // } catch (error) {
+        //     // 오류 처리
+        //     console.error('오류:', error);
+        // }
     };
 
     return (
@@ -177,6 +192,8 @@ export default function SignUp() {
                                         mask={'____-__-__'}
                                         sx={{ width: '100%' }}
                                         id="birth"
+                                        value={selectedDate}
+                                        onChange={handleDateChange}
                                     />
                                 </LocalizationProvider>
                             </Grid>

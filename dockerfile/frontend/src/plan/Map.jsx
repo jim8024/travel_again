@@ -1,136 +1,115 @@
-import React, { useEffect } from "react";
-import { textOverCut } from "./textOverCut.js";
-import "./Map.css";
+import React, { useEffect } from 'react';
+import './Map.css';
+import { textOverCut } from '../util/textOverCut';
 
-function Map({ selectedItems }) {
+function Map({ selectedItems, areaData }) {
   useEffect(() => {
     const { kakao } = window;
-    const container = document.getElementById("map");
+    const container = document.getElementById('map');
 
     const options = {
-      center: new kakao.maps.LatLng(37.4987464, 127.03169),
-      level: 9,
+      center: new kakao.maps.LatLng(areaData.mapy, areaData.mapx),
+      level: areaData.mlevel,
     };
     const map = new kakao.maps.Map(container, options);
 
-    const positions = [];
+    // Marker와 Polyline을 담을 배열
+    const markers = [];
+    const lines = [];
 
-    // const lineLine = new kakao.maps.Polyline();
-    let linePath = [];
+    // Overlay와 CustomOverlay를 담을 배열
+    const overlays = [];
+    const customOverlays = [];
 
-    for (let i = 0; i < selectedItems.length; i++) {
-      const position = {
-        title: selectedItems[i].title,
-        latlng: new kakao.maps.LatLng(
-          selectedItems[i].mapy,
-          selectedItems[i].mapx
-        ),
-        firstimage: selectedItems[i].firstimage,
-      };
-      positions.push(position);
-    }
+    // Map 컴포넌트 내에서 flattenedItems 로컬 변수로 설정
+    const flattenedItems = selectedItems.flat();
 
-    for (let j = 0; j < positions.length; j++) {
-      if (j !== 0) {
-        linePath = [positions[j - 1].latlng, positions[j].latlng];
+    // 지도 중심 좌표를 설정하는 함수
+    const setMapCenter = () => {
+      if (flattenedItems.length > 0) {
+        const bounds = new kakao.maps.LatLngBounds();
+        flattenedItems.forEach((item) => {
+          bounds.extend(new kakao.maps.LatLng(item.mapy, item.mapx));
+        });
+        map.setBounds(bounds);
       }
+    };
+
+    setMapCenter(); // 초기 지도 중심 좌표 설정
+
+    flattenedItems.forEach((item, index) => {
+      // Marker 생성
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(item.mapy, item.mapx),
+        title: item.title,
+        image: new kakao.maps.MarkerImage(
+          'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png',
+          new kakao.maps.Size(24, 35)
+        ),
+      });
+
+      markers.push(marker);
+
+      // Overlay 내용 생성
+      const overlayContent = `
+        <div class="overlaybox">
+          <div class="boxtitle" onclick="closeOverlay(${index})">${item.title}</div>
+          <div class="first">
+            <img src="${item.firstimage}" alt="tour Image" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="triangle text">${index + 1}</div>
+            <div class="addr text">${item.addr1}</div>
+          </div>
+          <span class="title">
+            ${textOverCut(item.overview, 102, ' ... ')}
+          </span>
+        </div>
+      `;
+
+      // CustomOverlay 생성
+      const customOverlay = new kakao.maps.CustomOverlay({
+        position: new kakao.maps.LatLng(item.mapy, item.mapx),
+        content: overlayContent,
+        xAnchor: 0.3,
+        yAnchor: 0.91,
+      });
+
+      customOverlays.push(customOverlay);
+
+      // Marker에 이벤트 리스너 등록
+      kakao.maps.event.addListener(marker, 'mouseover', () => customOverlay.setMap(map));
+      kakao.maps.event.addListener(marker, 'mouseout', () => customOverlay.setMap(null));
+      kakao.maps.event.addListener(marker, 'click', () => customOverlay.setMap(map));
+    });
+
+    // Polyline 그리기
+    for (let i = 1; i < markers.length; i++) {
+      const linePath = [markers[i - 1].getPosition(), markers[i].getPosition()];
 
       const drawLine = new kakao.maps.Polyline({
         map: map,
         path: linePath,
         strokeWeight: 3,
-        strokeColor: "#db4040",
+        strokeColor: '#db4040',
         strokeOpacity: 1,
-        strokeStyle: "solid",
-      });
-    }
-
-    const imageSrc =
-      "http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png";
-    const overlays = [];
-
-    for (let k = 0; k < positions.length; k++) {
-      const imageSize = new kakao.maps.Size(24, 35);
-      const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-      const marker = new kakao.maps.Marker({
-        map: map,
-        position: positions[k].latlng,
-        title: positions[k].title,
-        image: markerImage,
+        strokeStyle: 'solid',
       });
 
-      const content = `<div class="overlaybox">
-                        <div class="boxtitle" onclick="closeOverlay(${k})">${
-        positions[k].title
-      }</div>
-                        <div class="first">
-                            <img src="${
-                              positions[k].firstimage
-                            }" alt="tour Image" style="width: 100%; height: 100%; object-fit: cover;">
-                            <div class="triangle text">${k + 1}</div>
-                            <div class="addr text">${
-                              selectedItems[k].addr1
-                            }</div>
-                        </div>
-                        <span class="title">${textOverCut(
-                          selectedItems[k].overview,
-                          102,
-                          " ... "
-                        )}</span>
-                    </div>`;
-
-      const overlay = new kakao.maps.CustomOverlay({
-        position: positions[k].latlng,
-        content: content,
-        xAnchor: 0.3,
-        yAnchor: 0.91,
-      });
-
-      overlays.push(overlay);
-
-      kakao.maps.event.addListener(
-        marker,
-        "mouseover",
-        makeOverListener(map, overlay)
-      );
-      kakao.maps.event.addListener(
-        marker,
-        "mouseout",
-        makeOutListener(overlay)
-      );
-      kakao.maps.event.addListener(marker, "click", makeClickListener(overlay));
+      lines.push(drawLine);
     }
 
-    function makeOverListener(map, overlay) {
-      return function () {
-        overlay.setMap(map);
-      };
-    }
-
-    function makeOutListener(overlay) {
-      return function () {
-        overlay.setMap(null);
-      };
-    }
-
-    function makeClickListener(overlay) {
-      return function () {
-        overlay.setMap(map);
-      };
-    }
-
+    // 닫기 버튼을 클릭할 때 Overlay를 닫는 함수
     window.closeOverlay = function (index) {
-      overlays[index].setMap(null);
+      customOverlays[index].setMap(null);
     };
-  }, [selectedItems]);
+  }, [selectedItems, areaData.mapx, areaData.mapy, areaData.mlevel]);
 
   return (
     <div
       id="map"
       style={{
-        width: "100%",
-        height: "900px",
+        width: '100%',
+        height: '900px',
       }}
     ></div>
   );
