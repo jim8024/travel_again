@@ -3,10 +3,10 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import '../css/DatePicker.css';
-import { eachDayOfInterval } from 'date-fns';
+import { eachDayOfInterval, format } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 
-function DatePicker({ onDateChange, checkingSDate, checkingEDate }) {
+function DatePicker({ onDateChange, checkingSDate, checkingEDate,datesArray }) {
     const [state, setState] = useState([
         {
             startDate: null,
@@ -22,11 +22,19 @@ function DatePicker({ onDateChange, checkingSDate, checkingEDate }) {
         const endDate = new Date(item.selection.endDate);
         checkingSDate(startDate);
         checkingEDate(endDate);
+
+        // 시작일부터 종료일까지의 모든 날짜 배열 생성
         const datesArray = eachDayOfInterval({
             start: startDate,
             end: endDate,
         });
-        onDateChange(datesArray);
+
+        // 날짜 형식을 변경하거나 필요한 처리 수행
+        const formattedDates = datesArray.map(date =>
+            format(date, 'yyyy-MM-dd EEEE', { locale: ko })
+        );
+            
+        onDateChange(formattedDates);
     }
 
     return (

@@ -12,8 +12,8 @@ export default function OutLineTable({ day }) {
     // console.log(selectedItems)
     const areaData = location.state ? location.state.areaData : null;
     const selectedItems = location.state ? location.state.selectedItems : null;
-    const startDate = location.state ? location.state.startDate : null;
-    const endDate = location.state ? location.state.endDate : null;
+    const datesArray = location.state ? location.state.datesArray : null;
+
     //     const [data, setData] = useState([]);
 
     //     const fetchData = async () => {
@@ -37,7 +37,7 @@ export default function OutLineTable({ day }) {
                         <div className="dayblock">DAY {dayIndex + 1}</div>
 
                         <div className="day-loc-div">
-                            <h4 className="day-text">2019/04/19</h4>
+                            <h4 className="day-text">{datesArray[dayIndex]}</h4>
                             <p className="loc-text">{areaData.korTitle}</p>
                         </div>
                     </div>
