@@ -9,9 +9,10 @@ export default function DetailPage() {
   // 로컬 데이터 필요
   const location = useLocation();
     // console.log(location);
+    // console.log(selectedItems)
   const areaData = location.state ? location.state.areaData : null;
   const selectedItems = location.state ? location.state.selectedItems : null;
-  console.log(selectedItems)
+ 
   // 필요 목록 title, locImage, location, date, day
   return (
     <div className="detail-page-container">
