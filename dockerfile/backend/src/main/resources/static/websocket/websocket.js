@@ -5,7 +5,7 @@ const stompClient = new StompJs.Client({
 stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
-    stompClient.subscribe('/topic/message', (message) => {
+    stompClient.subscribe('/topic/message2', (message) => {
         showGreeting(JSON.parse(message.body).content);
     });
 };

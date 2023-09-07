@@ -4,39 +4,47 @@ import TableCard from "./TableCard";
 import "../css/OutLineTable.css"
 import { Box } from "@mui/material";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
-export default  function OutLineTable(){
-    const [data, setData] = useState([]);
+export default  function OutLineTable({day}){
+    const location = useLocation();
+    // console.log(location);
+    // console.log(selectedItems)
+    const areaData = location.state ? location.state.areaData : null;
+    const selectedItems = location.state ? location.state.selectedItems : null;
+//     const [data, setData] = useState([]);
 
-    const fetchData = async () => {
-        try {
-        const response = await axios.get("#");
-        setData(response.data); // 가져온 데이터를 state에 저장합니다.
-        } catch (error) {
-        console.error("데이터 가져오기 오류:", error);
-        }
-    };
+//     const fetchData = async () => {
+//         try {
+//         const response = await axios.get("#");
+//         setData(response.data); // 가져온 데이터를 state에 저장합니다.
+//         } catch (error) {
+//         console.error("데이터 가져오기 오류:", error);
+//         }
+//     };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-    return( 
-        // 개요테이블 헤더
-       <Box sx={{width:"100%"}}>
-            {data.map((item,index)=>(
-                <div className="table-head">
-                                        {/* 인덱스 */}
-                    <div className="dayblock">DAY{index+1}</div>
-                    <div className="day-loc-div">
-                                                {/* 데이터 data.date */}
-                        <h4 className="day-text">{item.date}</h4>
-                                                {/* 데이터 data.title */}
-                        <p className="loc-text">{item.title}</p>
-                    </div>
-                </div>
-            ))}
-            {/* 개요테이블 몸통 및 내용 */}
-            <TableCard/>
-        </Box> 
-    )
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+   // ...
+return (
+    <Box sx={{ width: "100%" }}>
+      {selectedItems.map((day, dayIndex) => (
+        <>
+            <div className="table-head" key={dayIndex}>
+            <div className="dayblock">DAY {dayIndex + 1}</div>
+            
+            <div className="day-loc-div">
+                <h4 className="day-text">2019/04/19</h4>
+                <p className="loc-text">{areaData.korTitle}</p>
+            </div>
+            </div>
+            <TableCard day={day} key={dayIndex} />
+        </>
+        ))}
+    </Box>
+    
+  );
+  
+  
 }
