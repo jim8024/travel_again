@@ -1,7 +1,7 @@
 //개요페이지
 import { Grid, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import  SideMapItem from "../asset/SideMapItem";
+import SideMapItem from "../asset/SideMapItem";
 import "../css/OutLineForm.css";
 import OutLineTable from "./OutLineTable";
 import { useLocation } from "react-router-dom";
@@ -10,6 +10,7 @@ import MapHeader from "./SideMap/MapHeader";
 
 export default function OutLineForm() {
   const location = useLocation();
+  const areaData = location.state ? location.state.areaData : null;
   const selectedItems = location.state ? location.state.selectedItems : null;
 
   const [day, setDay] = useState(0);
@@ -37,31 +38,36 @@ export default function OutLineForm() {
   // useEffect(() => {
   //   fetchData();
   // }, []);
-  
+
   return (
     <>
-     
-          <Grid container className="item-container"> {/* 각 Grid에 고유한 key 부여 */}
-            <Grid item className="table-container" xs={8}>
-              {/* 개요 테이블 컴포넌트 */}
-              <OutLineTable/>
-            </Grid>
-            {/* 개요페이지 지도 */}
-              <Grid
-                item
-                className="map-container"
-                xs={3}
-                sx={{ marginLeft: "auto", marginRight: "auto" }}
-              >
-                <MapHeader 
-                  itemLength={itemLength}
-                  day={day}
-                  onDayNext={handleDayNext}
-                  onDayPrev={handleDayPrev}/>
-                <SideMapItem />
-                <MapContent day={day}/>
-              </Grid>
-          </Grid>
+      <Grid container className="item-container">
+        {" "}
+        {/* 각 Grid에 고유한 key 부여 */}
+        <Grid item className="table-container" xs={8}>
+          {/* 개요 테이블 컴포넌트 */}
+          <OutLineTable />
+        </Grid>
+        {/* 개요페이지 지도 */}
+        <Grid
+          item
+          className="map-container"
+          xs={3}
+          sx={{ marginLeft: "auto", marginRight: "auto" }}
+        >
+          <MapHeader
+            itemLength={itemLength}
+            day={day}
+            onDayNext={handleDayNext}
+            onDayPrev={handleDayPrev}
+          />
+          <SideMapItem 
+            selectedItems={selectedItems} 
+            day={day}
+            areaData={areaData} />
+          <MapContent day={day} />
+        </Grid>
+      </Grid>
     </>
   );
 }
