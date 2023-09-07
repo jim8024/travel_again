@@ -18,7 +18,7 @@ function CreatePlanner() {
     const [selectedItems, setSelectedItems] = useState([]);
     const [startDate, setStartDate] = useState(0);
     const [endDate, setEndDate] = useState(0);
-
+    const [datesArray, setDatesArray] = useState(0);
     const location = useLocation();
     //console.log(location);
     const areaData = location.state ? location.state.areaData : null;
@@ -36,6 +36,7 @@ function CreatePlanner() {
 
     const handleDateChange = (dateArray) => {
         setDateLength(dateArray.length);
+        setDatesArray(dateArray)
     };
 
     const convertDay = (array) => {
@@ -67,7 +68,7 @@ function CreatePlanner() {
             console.error('오류', error);
         }
     };
-
+    console.log(datesArray)
     return (
         <>
             <div className="plan-header">
@@ -81,6 +82,7 @@ function CreatePlanner() {
                             onDateChange={handleDateChange}
                             checkingSDate={checkingSDate}
                             checkingEDate={checkingEDate}
+                            datesArray={datesArray}
                         />
                         <h3>선택된 여행지</h3>
                         <hr />
@@ -113,6 +115,7 @@ function CreatePlanner() {
                         selectedItems: selectedItems,
                         startDate: formattedStartDate,
                         endDate: formattedEndDate,
+                        datesArray: datesArray
                     }}
                 >
                     <Button variant="contained" sx={{ backgroundColor: '#8181F7' }} onClick={sendData}>

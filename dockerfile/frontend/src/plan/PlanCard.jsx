@@ -10,10 +10,20 @@ import output from '../utils/finalresult.json';
 import { textOverCut } from '../util/textOverCut';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import TourModal from './modal/TourModal';
 
 export default function PlanCard({ selectedItems, setSelectedItems, selectedIndex, areaData }) {
-    const [tourList, setTourList] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const openModal = (contentid) => {
+        setSelectedContentId(contentid);
+        setModalOpen(true);
+    };
 
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+    const [tourList, setTourList] = useState([]);
+    const [selectedContentId, setSelectedContentId] = useState(null);
     useEffect(() => {
         // API에서 데이터를 가져오는 함수
         async function fetchData() {
@@ -90,6 +100,7 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
                 >
                     <CardMedia
                         component="img"
+                        onClick={() => openModal(item.contentid)}
                         sx={{
                             width: 70,
                             height: 70,
@@ -100,7 +111,7 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
                         image={item.firstimage}
                         alt={item.title}
                     />
-                    <CardContent sx={{ position: 'static', flexGrow: '5' }}>
+                    <CardContent sx={{ position: 'static', flexGrow: '5' }} onClick={() => openModal(item.contentid)}>
                         <Typography
                             variant="h6"
                             component="div"
@@ -167,6 +178,7 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
                 >
                     <ArrowForwardIosIcon />
                 </Button>
+                <TourModal isOpen={modalOpen} onClose={closeModal} contentid={selectedContentId} />
             </div>
         </>
     );

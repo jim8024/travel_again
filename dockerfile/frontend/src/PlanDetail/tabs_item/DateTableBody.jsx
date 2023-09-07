@@ -9,6 +9,8 @@ export default function DateTableBody(){
     console.log(location);
     const areaData = location.state ? location.state.areaData : null;
     const selectedItems =location.state ? location.state.selectedItems : null ;
+    const datesArray = location.state ? location.state.datesArray : null;
+    
     // const fetchData = async () => {
     //     try {
     //       const response = await axios.get("#");
@@ -26,8 +28,8 @@ export default function DateTableBody(){
                 <tr>
                     <td>
                         {/* p 요소로 반드시 작성해야함 */}
-                        <p className="date-text">2019.12.22</p>
-                         <p className="date-text-day">DAY{dayIndex+1}</p>
+                        <p className="date-text-day">DAY{dayIndex+1}</p>
+                        <p className="date-text">{datesArray[dayIndex]}</p>
                     </td>
                     <td>
                         <ul className="circle-ul">
