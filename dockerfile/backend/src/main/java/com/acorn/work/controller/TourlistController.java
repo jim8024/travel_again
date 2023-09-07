@@ -26,14 +26,14 @@ public class TourlistController {
     }
 
     // tourlist by areacode 리스트 (page)
-    @GetMapping("/list/{areacode}")
+    @GetMapping("/list/areacode/{areacode}")
     public ResponseEntity getTourlistPageFindByAreacode(@PathVariable String areacode,Pageable pageable) {
         System.out.println(areacode);
         return ResponseUtils.completed(tourlistService.getTourlistPageOnAreacode(areacode,pageable));
     }
 
     // title 검색 리스트 (List)
-    @GetMapping("/{title}")
+    @GetMapping("/list/title/{title}")
     public ResponseEntity getTourlistByTitle(@PathVariable String title,
                                       Pageable pageable) {
         return ResponseUtils.completed(tourlistService.getTourlistByTitle(title, pageable));

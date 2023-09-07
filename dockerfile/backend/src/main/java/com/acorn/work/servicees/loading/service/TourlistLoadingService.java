@@ -1,10 +1,14 @@
-package com.acorn.work.loading.service;
+package com.acorn.work.servicees.loading.service;
 
 import com.acorn.core.customException.BizException;
 import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.entity.TourlistEntity;
 import com.acorn.work.mapstruct.TourlistMapper;
 import com.acorn.work.repository.TourlistRepository;
+import com.acorn.work.servicees.tour.doc.TourListDoc;
+import com.acorn.work.servicees.tour.dto.TourListEcDTO;
+import com.acorn.work.servicees.tour.mapper.EcMapper;
+import com.acorn.work.servicees.tour.repository.TourListDocRepository;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.NonNull;
@@ -24,7 +28,7 @@ public class TourlistLoadingService {
 
 
     private final TourlistRepository tourlistRepository;
-//    private final TourListDocRepository tourListDOCRepository;
+    private final TourListDocRepository tourListDOCRepository;
     private final Gson gson;
     @Value("${tourlistDir}")
     private String tourlistDir;
@@ -42,23 +46,24 @@ public class TourlistLoadingService {
 
     }
 
-//    public void loadingEcTourlist(@NonNull String filename) {
-//
-//        Reader reader = fileLoad(filename);
-//
-//        List<TourListEcDTO> tourlistEcDTOs =  gson.fromJson(reader,
-//                new TypeToken<List<TourListEcDTO>>(){}.getType() );
-//
-//        List<TourListDoc> tourListDocs = EcMapper.INSTANCE.toTourListDOCs(tourlistEcDTOs);
-//        int i = 0;
-//        for (TourListDoc tourListDoc : tourListDocs) {
-//            tourListDOCRepository.save (tourListDoc);
-//            i += 1;
-//            if (i > 10 ) break;
-//        }
-//
+    public void loadingEcTourlist(@NonNull String filename) {
 
-//    }
+        Reader reader = fileLoad(filename);
+        System.out.println(filename);
+
+        List<TourListEcDTO> tourlistEcDTOs =  gson.fromJson(reader,
+                new TypeToken<List<TourListEcDTO>>(){}.getType() );
+
+        List<TourListDoc> tourListDocs = EcMapper.INSTANCE.toTourListDOCs(tourlistEcDTOs);
+        int i = 0;
+        for (TourListDoc tourListDoc : tourListDocs) {
+            tourListDOCRepository.save (tourListDoc);
+            i += 1;
+            if (i > 10 ) break;
+        }
+
+
+    }
 
     private Reader fileLoad(String filename) {
         Reader reader = null;

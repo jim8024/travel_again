@@ -1,8 +1,8 @@
-package com.acorn.work.loading.controller;
+package com.acorn.work.servicees.loading.controller;
 
 import com.acorn.core.common.constant.CommonConstant;
 import com.acorn.core.utils.ResponseUtils;
-import com.acorn.work.loading.service.TourlistLoadingService;
+import com.acorn.work.servicees.loading.service.TourlistLoadingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +22,10 @@ public class InitLoadingController {
         tourlistLoadingService.loadingTourlist(filename);
         return ResponseUtils.completed(CommonConstant.COMMON_TRUE);
     }
-//
-//    @GetMapping("/tourlist/es/{filename}")
-//    public ResponseEntity loadingEcTourlist(@PathVariable String filename) {
-//        tourlistLoadingService.loadingEcTourlist(filename);
-//        return ResponseUtils.completed(CommonConstant.COMMON_TRUE);
-//    }
+
+    @GetMapping("/tourlist/es/{filename}")
+    public ResponseEntity loadingEcTourlist(@PathVariable String filename) {
+        tourlistLoadingService.loadingEcTourlist(filename);
+        return ResponseUtils.completed(CommonConstant.COMMON_TRUE);
+    }
 }
