@@ -62,9 +62,9 @@ function CreatePlanner() {
                 endDate: formattedEndDate,
                 plannerTourlistDTOS: arr
             };
-            console.log(arr)
-            console.log(JSON.stringify(arr))
-            console.log(convertDay(selectedItems))
+            // console.log(arr)
+            // console.log(JSON.stringify(arr))
+            // console.log(convertDay(selectedItems))
             const response = await axios.post('http://localhost:9000/planner/insert', dataToSend);
 
             console.log('서버응답', response.data);
