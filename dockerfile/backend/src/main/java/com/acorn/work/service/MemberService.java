@@ -5,6 +5,8 @@ import com.acorn.work.entity.MemberEntity;
 import com.acorn.work.mapstruct.MemberMapper;
 import com.acorn.work.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -12,13 +14,16 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     public String signup(MemberDTO memberDTO) {
+        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
         memberRepository.save(MemberMapper.INSTANCE.toEntity(memberDTO));
         String memberNo = memberRepository.findByMemberId(memberDTO.getMemberId()).getMemberNo();
         return memberNo;
     }
 
     public String signIn(MemberDTO memberDTO) {
+        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
         MemberEntity memberEntityId = memberRepository.findByMemberId(memberDTO.getMemberId());
         MemberEntity memberEntityIdPwd = memberRepository.findByMemberIdAndPwd(memberDTO.getMemberId(), memberDTO.getPwd());
 

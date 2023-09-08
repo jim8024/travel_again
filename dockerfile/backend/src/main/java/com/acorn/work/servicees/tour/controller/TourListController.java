@@ -24,6 +24,7 @@ public class TourListController {
     @GetMapping("/es/title")
     // @RequestParam("title")
     public ResponseEntity getTitle(@RequestParam("searchValue") String searchValue) {
+        System.out.println(searchValue);
         return ResponseUtils.completed(tourListService.getTourListByTitle(searchValue));
     }
 
