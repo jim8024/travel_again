@@ -6,7 +6,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
     //토큰 발급시 서명할 key
-    private String secret="abcd1234kimgura";
+    private String secret="1234";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -37,8 +36,8 @@ public class JwtUtil {
      * @return
      */
     public Claims parseJwt(String jwt) {
-
-        System.out.println(Jwts.parser().setSigningKey(Base64.getEncoder().encodeToString(secret.getBytes())).toString());
+        System.out.println(jwt);
+        System.out.println(Jwts.parser().setSigningKey(secret));
 
         Claims claims = Jwts.parser()
                 .setSigningKey(secret.getBytes())
@@ -70,8 +69,8 @@ public class JwtUtil {
                 .setClaims(claims)  //토큰에 담을 추가 정보
                 .setSubject(subject) //토큰의 주제(사용자명 or 사용자의 id)
                 .setIssuedAt(new Date(System.currentTimeMillis())) // 토큰 발급 시간
-                .setExpiration(new Date(System.currentTimeMillis() + 1000*60)) //토큰 무효화 되는 시간
-                .signWith(SignatureAlgorithm.HS256, secret).compact(); // HS256 알고리즘으로 서명해서 토큰얻어내기
+                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*30)) //토큰 무효화 되는 시간
+                .signWith(SignatureAlgorithm.HS256, secret.getBytes()).compact(); // HS256 알고리즘으로 서명해서 토큰얻어내기
     }
     //토큰 유효성 여부를 리턴하는 메소드
     public Boolean validateToken(String token, UserDetails userDetails) {

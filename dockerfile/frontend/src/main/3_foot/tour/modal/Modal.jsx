@@ -8,7 +8,7 @@ import tourjson from '../../../../utils/trip.json';
 import { Link } from 'react-router-dom';
 
 const Modal = ({ isOpen, onClose, areacode }) => {
-    if (!isOpen) return null;
+    if (!isOpen) return null
     const areaData = tourjson.find((item) => item.areacode === areacode);
     console.log(areaData);
     return (
