@@ -46,23 +46,23 @@ export default function SignUp() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         // ------------ 나중에 서버랑 연결할 때 주석제거하기 ---------------------------
-        // const data = new FormData(event.currentTarget);
-        // try {
-        //     const response = await axios.post('여기에 서버 주소', {
-        //         name: data.get('name'),
-        //         id: data.get('id'),
-        //         password: data.get('password'),
-        //         email: data.get('email'),
-        //         phone: data.get('phone'),
-        //         birth: data.get('birth'),
-        //         gender: data.get('row-radio-buttons-group'),
-        //     });
-        //     // 서버 응답 처리
-        //     console.log('서버 응답:', response.data);
-        // } catch (error) {
-        //     // 오류 처리
-        //     console.error('오류:', error);
-        // }
+        const data = new FormData(event.currentTarget);
+        try {
+            const response = await axios.post('http://localhost:9000/member/signup', {
+                name: data.get('name'),
+                memberId: data.get('id'),
+                pwd: data.get('password'),
+                email: data.get('email'),
+                phone: data.get('phone'),
+                birth: selectedDate,
+                gender: data.get('row-radio-buttons-group'),
+            });
+            // 서버 응답 처리
+            console.log('서버 응답:', response.data);
+        } catch (error) {
+            // 오류 처리
+            console.error('오류:', error);
+        }
     };
 
     return (
@@ -139,6 +139,7 @@ export default function SignUp() {
                                             </InputAdornment>
                                         }
                                         label="Password"
+                                        name="password"
                                     />
                                 </FormControl>
                             </Grid>
@@ -201,8 +202,8 @@ export default function SignUp() {
                                 <FormControl>
                                     <FormLabel id="gender">성별</FormLabel>
                                     <RadioGroup row name="row-radio-buttons-group">
-                                        <FormControlLabel value="male" control={<Radio />} label="남자" />
-                                        <FormControlLabel value="female" control={<Radio />} label="여자" />
+                                        <FormControlLabel value="m" control={<Radio />} label="남자" />
+                                        <FormControlLabel value="f" control={<Radio />} label="여자" />
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>

@@ -25,7 +25,8 @@ public class MemberEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String memberNo;
 
-    @Column(length = 32)
+
+    @Column(length = 32, unique = true)
     private String memberId;
 
     @Column(length = 200)
@@ -40,10 +41,10 @@ public class MemberEntity implements UserDetails {
     @Column(length = 1)
     private String gender;
 
-    @Column(length = 100)
+    @Column(length = 100, unique = true)
     private String phone;
 
-    @Column(length = 100)
+    @Column(length = 100, unique = true)
     private String email;
 
     @Override
