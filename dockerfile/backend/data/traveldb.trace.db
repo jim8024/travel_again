@@ -3687,3 +3687,9 @@ Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:510)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	... 149 more
+2023-09-08 16:43:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(1)": "'male' (4)"; SQL statement:
+/* insert for com.acorn.work.entity.MemberEntity */insert into tb_member (birth,email,gender,member_id [22001-214]
+2023-09-08 16:51:16 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]=TB_PLANNER"; SQL statement:
+=TB_PLANNER [42000-214]
