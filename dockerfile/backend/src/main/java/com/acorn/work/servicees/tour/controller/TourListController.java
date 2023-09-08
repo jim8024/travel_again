@@ -21,7 +21,7 @@ public class TourListController {
         return ResponseUtils.completed(tourListService.getTourList());
     }
 
-    @GetMapping("/es/title")
+    @PostMapping("/es/title")
     // @RequestParam("title")
     public ResponseEntity getTitle(@RequestParam("searchValue") String searchValue) {
         System.out.println(searchValue);
@@ -34,7 +34,7 @@ public class TourListController {
         return ResponseUtils.completed(tourListService.getTourListByTitle(searchValue, pageable));
     }
 
-    @GetMapping("/es/overview")
+    @PostMapping("/es/overview")
     public ResponseEntity getTourListByOverview(@RequestParam("searchValue") String searchValue) {
         return ResponseUtils.completed(tourListService.getTourListByOverview(searchValue));
     }
