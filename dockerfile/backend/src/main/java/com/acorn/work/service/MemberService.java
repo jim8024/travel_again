@@ -16,14 +16,15 @@ public class MemberService {
     private final MemberRepository memberRepository;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     public String signup(MemberDTO memberDTO) {
-        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+//        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
         memberRepository.save(MemberMapper.INSTANCE.toEntity(memberDTO));
         String memberNo = memberRepository.findByMemberId(memberDTO.getMemberId()).getMemberNo();
         return memberNo;
     }
 
     public String signIn(MemberDTO memberDTO) {
-        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+//        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+        System.out.println(memberDTO.toString());
         MemberEntity memberEntityId = memberRepository.findByMemberId(memberDTO.getMemberId());
         MemberEntity memberEntityIdPwd = memberRepository.findByMemberIdAndPwd(memberDTO.getMemberId(), memberDTO.getPwd());
 

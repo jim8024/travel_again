@@ -43,7 +43,7 @@ function CreatePlanner() {
         let obj = [];
         for (let i = 0; i < array.length; i++) {
             for (let j = 0; j < array[i].length; j++) {
-                let arr = [];
+                let arr = {};
                 arr.contentid = array[i][j].contentid;
                 arr.tourDay = i + 1;
                 arr.tourSeq = j + 1;
@@ -54,14 +54,18 @@ function CreatePlanner() {
     };
 
     const sendData = async () => {
+        const arr = convertDay(selectedItems)
         try {
+
             const dataToSend = {
                 startDate: formattedStartDate,
                 endDate: formattedEndDate,
-                convertDayData: convertDay(selectedItems),
+                plannerTourlistDTOS: arr
             };
-
-            const response = await axios.post('#', dataToSend);
+            console.log(arr)
+            console.log(JSON.stringify(arr))
+            console.log(convertDay(selectedItems))
+            const response = await axios.post('http://localhost:9000/planner/insert', dataToSend);
 
             console.log('서버응답', response.data);
         } catch (error) {

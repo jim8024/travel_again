@@ -27,16 +27,16 @@ export default function SignIn() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         // ------------ 나중에 서버랑 연결할 때 주석제거하기 ---------------------------
-        // const data = new FormData(event.currentTarget);
-        // try {
-        //     const response = await axios.post('여기에 서버 주소', {
-        //         email: data.get('email'),
-        //         password: data.get('password'),
-        //     });
-        //     console.log('서버 응답:', response.data);
-        // } catch (error) {
-        //     console.error('오류:', error);
-        // }
+        const data = new FormData(event.currentTarget);
+        try {
+            const response = await axios.post('http://localhost:9000/member/signin', {
+                memberId: data.get('id'),
+                pwd: data.get('password'),
+            });
+            console.log('서버 응답:', response.data);
+        } catch (error) {
+            console.error('오류:', error);
+        }
     };
 
     //아이디 보내야함 플래너페이지, 아이디 대조
