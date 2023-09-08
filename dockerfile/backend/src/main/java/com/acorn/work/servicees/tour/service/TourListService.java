@@ -24,7 +24,6 @@ public class TourListService {
     private final TourListDocRepository tourListDocRepository;
 
     // 테스트용
-
     public List<TourListEcDTO> getTourList() {
         List<TourListDoc> tourListDocs = tourListDocRepository.findAll();
         return EcMapper.INSTANCE.toTourListEcDTOs(tourListDocs);
