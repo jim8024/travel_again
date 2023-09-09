@@ -75,7 +75,6 @@ function CreatePlanner() {
         dataToSend
       );
 
-<<<<<<< HEAD
       console.log("서버응답", response.data);
     } catch (error) {
       console.error("오류", error);
@@ -97,6 +96,13 @@ function CreatePlanner() {
               checkingEDate={checkingEDate}
               datesArray={datesArray}
             />
+
+            <PlanCard
+              setSelectedItems={setSelectedItems}
+              selectedItems={selectedItems}
+              selectedIndex={selectedIndex}
+              areaData={areaData}
+            />
           </Grid>
           <Grid
             item
@@ -115,17 +121,6 @@ function CreatePlanner() {
             />
           </Grid>
           <DateAlert dateLength={dateLength} />
-=======
-            const dataToSend = {
-                startDate: formattedStartDate,
-                endDate: formattedEndDate,
-                plannerTourlistDTOS: arr
-            };
-            // console.log(arr)
-            // console.log(JSON.stringify(arr))
-            // console.log(convertDay(selectedItems))
-            const response = await axios.post('http://localhost:9000/planner/insert', dataToSend);
->>>>>>> 31aa3b2b2f29a9427a294f861a8b00bccb94c22e
 
           <Grid item className="maparea" xs={12} sm={8}>
             <Map selectedItems={selectedItems} areaData={areaData} />
