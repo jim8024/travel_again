@@ -84,4 +84,8 @@ h3 {
     display: flex;
     margin-top: 40px;
     justify-content: center;
+    position: absolute;
+    top:-15px;
+    right: 20px;
+    z-index: 2;
 }

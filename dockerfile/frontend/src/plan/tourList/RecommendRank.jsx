@@ -6,13 +6,13 @@ import Typography from '@mui/material/Typography';
 import { Button, Card } from '@mui/material';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 import StarIcon from '@mui/icons-material/Star';
-import output from '../utils/finalresult.json';
-import { textOverCut } from '../util/textOverCut';
+import output from '../../utils/finalresult.json';
+import { textOverCut } from '../../util/textOverCut';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import TourModal from './modal/TourModal';
+import TourModal from '.././modal/TourModal';
 
-export default function PlanCard({ selectedItems, setSelectedItems, selectedIndex, areaData }) {
+export default function RecommendRank({ selectedItems, setSelectedItems, selectedIndex, areaData }) {
     const [modalOpen, setModalOpen] = useState(false);
     const openModal = (contentid) => {
         setSelectedContentId(contentid);
