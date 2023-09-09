@@ -142,6 +142,7 @@ function CreatePlanner() {
             variant="contained"
             sx={{ backgroundColor: "#8181F7" }}
             onClick={sendData}
+            size="large"
           >
             일정 생성하기
           </Button>
