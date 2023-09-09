@@ -14,6 +14,8 @@ import {
   RadioGroup,
   FormControlLabel,
 } from "@mui/material";
+import { useState } from "react";
+import FilterAlert from "./modal/FilterAlert";
 // components
 // import Iconify from '../../../components/iconify';
 // import Scrollbar from "../../../components/scrollbar";
@@ -27,33 +29,19 @@ export const SORT_BY_OPTIONS = [
   { value: "priceDesc", label: "Price: High-Low" },
   { value: "priceAsc", label: "Price: Low-High" },
 ];
-export const FILTER_GENDER_OPTIONS = ["Men", "Women", "Kids"];
+export const FILTER_GENDER_OPTIONS = ["남성", "여성"];
 export const FILTER_CATEGORY_OPTIONS = [
-  "All",
-  "Shose",
-  "Apparel",
-  "Accessories",
+  "ALL",
+  "10~20",
+  "20~30",
+  "30~40",
+  "40~60",
 ];
-export const FILTER_RATING_OPTIONS = [
-  "up4Star",
-  "up3Star",
-  "up2Star",
-  "up1Star",
-];
+
 export const FILTER_PRICE_OPTIONS = [
-  { value: "below", label: "Below $25" },
-  { value: "between", label: "Between $25 - $75" },
-  { value: "above", label: "Above $75" },
-];
-export const FILTER_COLOR_OPTIONS = [
-  "#00AB55",
-  "#000000",
-  "#FFFFFF",
-  "#FFC0CB",
-  "#FF4842",
-  "#1890FF",
-  "#94D82D",
-  "#FFC107",
+  { value: "activity", label: "액티비티" },
+  { value: "healing", label: "힐링" },
+  { value: "foodie", label: "식도락" },
 ];
 
 // ----------------------------------------------------------------------
@@ -69,15 +57,20 @@ export default function ShopFilterSidebar({
   onOpenFilter,
   onCloseFilter,
 }) {
+  const [isFilterAlertOpen, setFilterAlertOpen] = useState(false);
+
+  const handleFilterAlertOpen = () => {
+    setFilterAlertOpen(true);
+  };
+
+  const handleFilterAlertClose = () => {
+    setFilterAlertOpen(false);
+  };
+
   return (
     <>
-      <Button
-        disableRipple
-        color="inherit"
-        // endIcon={<Iconify icon="ic:round-filter-list" />}
-        onClick={onOpenFilter}
-      >
-        Filters&nbsp;
+      <Button disableRipple color="inherit" onClick={onOpenFilter}>
+        필터&nbsp;
       </Button>
 
       <Drawer
@@ -85,30 +78,23 @@ export default function ShopFilterSidebar({
         open={openFilter}
         onClose={onCloseFilter}
         PaperProps={{
-          sx: { width: 280, border: "none", overflow: "hidden" },
+          sx: {
+            width: 280,
+            border: "none",
+            overflow: "hidden",
+            overflowY: "auto",
+          },
         }}
       >
         <Stack
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          sx={{ px: 1, py: 2 }}
-        >
-          <Typography variant="subtitle1" sx={{ ml: 1 }}>
-            Filters
-          </Typography>
-          {/* <IconButton onClick={onCloseFilter}>
-            <Iconify icon="eva:close-fill" />
-          </IconButton> */}
-        </Stack>
-
-        <Divider />
-
-        {/* <Scrollbar> */}
+        ></Stack>
         <Stack spacing={3} sx={{ p: 3 }}>
           <div>
             <Typography variant="subtitle1" gutterBottom>
-              Gender
+              성별
             </Typography>
             <FormGroup>
               {FILTER_GENDER_OPTIONS.map((item) => (
@@ -123,7 +109,7 @@ export default function ShopFilterSidebar({
 
           <div>
             <Typography variant="subtitle1" gutterBottom>
-              Category
+              연령대별
             </Typography>
             <RadioGroup>
               {FILTER_CATEGORY_OPTIONS.map((item) => (
@@ -139,20 +125,7 @@ export default function ShopFilterSidebar({
 
           <div>
             <Typography variant="subtitle1" gutterBottom>
-              Colors
-            </Typography>
-            {/* <ColorMultiPicker
-              name="colors"
-              selected={[]}
-              colors={FILTER_COLOR_OPTIONS}
-              onChangeColor={(color) => [].includes(color)}
-              sx={{ maxWidth: 38 * 4 }}
-            /> */}
-          </div>
-
-          <div>
-            <Typography variant="subtitle1" gutterBottom>
-              Price
+              테마
             </Typography>
             <RadioGroup>
               {FILTER_PRICE_OPTIONS.map((item) => (
@@ -161,37 +134,6 @@ export default function ShopFilterSidebar({
                   value={item.value}
                   control={<Radio />}
                   label={item.label}
-                />
-              ))}
-            </RadioGroup>
-          </div>
-
-          <div>
-            <Typography variant="subtitle1" gutterBottom>
-              Rating
-            </Typography>
-            <RadioGroup>
-              {FILTER_RATING_OPTIONS.map((item, index) => (
-                <FormControlLabel
-                  key={item}
-                  value={item}
-                  control={
-                    <Radio
-                      disableRipple
-                      color="default"
-                      // icon={<Rating readOnly value={4 - index} />}
-                      // checkedIcon={<Rating readOnly value={4 - index} />}
-                      sx={{
-                        "&:hover": { bgcolor: "transparent" },
-                      }}
-                    />
-                  }
-                  label="& Up"
-                  sx={{
-                    my: 0.5,
-                    borderRadius: 1,
-                    "&:hover": { opacity: 0.48 },
-                  }}
                 />
               ))}
             </RadioGroup>
@@ -206,11 +148,14 @@ export default function ShopFilterSidebar({
             type="submit"
             color="inherit"
             variant="outlined"
+            onClick={handleFilterAlertOpen}
             // startIcon={<Iconify icon="ic:round-clear-all" />}
-          >
-            Clear All
-          </Button>
+          >검색하기</Button>
         </Box>
+        <FilterAlert
+          open={isFilterAlertOpen}
+          onClose={handleFilterAlertClose}
+        />
       </Drawer>
     </>
   );
