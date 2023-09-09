@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./css/CreatePlanner.css";
 import Map from "./Map";
-import PlanCard from "./PlanCard";
 import { Button, Grid } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import DateAccordion from "./date/DateAccordion";
@@ -10,11 +9,9 @@ import DatePicker from "./date/DatePicker";
 import axios from "axios";
 import { format } from "date-fns";
 import ko from "date-fns/locale/ko";
-import { DateRange } from "@mui/icons-material";
-import RealTimeList from "./tourList/RealTimeList";
-import RecommendRank from "./tourList/RecommendRank";
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import PlanTabs from "./PlanTabs";
+import PlanDrawer from "./PlanDrawer";
 
 function CreatePlanner() {
   const [dateLength, setDateLength] = useState(0);
@@ -23,10 +20,12 @@ function CreatePlanner() {
   const [startDate, setStartDate] = useState(0);
   const [endDate, setEndDate] = useState(0);
   const [datesArray, setDatesArray] = useState(0);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
   const location = useLocation();
   //console.log(location);
   const areaData = location.state ? location.state.areaData : null;
   //날짜 시작일, 종료일 구하는 함수 => DatePicker
+  
 
   const checkingSDate = (i) => {
     setStartDate(i);
@@ -98,6 +97,12 @@ function CreatePlanner() {
               checkingEDate={checkingEDate}
               datesArray={datesArray}
             />
+            <PlanTabs
+              selectedItems={selectedItems}
+              setSelectedItems={setSelectedItems}
+              selectedIndex={selectedIndex}
+              areaData={areaData}
+            />
           </Grid>
           <Grid
             item
@@ -114,6 +119,14 @@ function CreatePlanner() {
               selectedItems={selectedItems}
               setSelectedIndex={setSelectedIndex}
             />
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "#8181F7" }}
+              size="large"
+              onClick={() => setOpenDrawer(true)} // 클릭 시 드로어 열기
+            >
+              검색하기 <KeyboardArrowRightIcon />
+            </Button>
           </Grid>
           <DateAlert dateLength={dateLength} />
 
@@ -143,6 +156,7 @@ function CreatePlanner() {
           </Button>
         </Link>
       </div>
+      <PlanDrawer open={openDrawer} setOpen={setOpenDrawer} />
     </>
   );
 }
