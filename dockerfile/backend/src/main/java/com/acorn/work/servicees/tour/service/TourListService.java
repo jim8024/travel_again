@@ -3,12 +3,10 @@ package com.acorn.work.servicees.tour.service;
 import com.acorn.core.utils.UuidUtils;
 import com.acorn.work.es.dto.ResponsePageDTO;
 import com.acorn.work.es.dto.searchresponse.SearchResDTO;
-import com.acorn.work.servicees.tour.doc.SearchDoc;
 import com.acorn.work.servicees.tour.doc.TourListDoc;
 import com.acorn.work.servicees.tour.dto.TourListEcDTO;
 import com.acorn.work.servicees.tour.dto.TourListeReqDTO;
 import com.acorn.work.servicees.tour.mapper.EcMapper;
-import com.acorn.work.servicees.tour.repository.SearchDocRepository;
 import com.acorn.work.servicees.tour.repository.TourListDocRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +25,7 @@ import java.util.Optional;
 public class TourListService {
 
     private final TourListDocRepository tourListDocRepository;
-    private final SearchDocRepository searchDocRepository;
+//    private final SearchDocRepository searchDocRepository;
 
     // 테스트용
     public List<TourListEcDTO> getTourList() {
@@ -88,14 +86,14 @@ public class TourListService {
 
     }
 
-    public boolean saveSearchValue(String searchValue){
-
-        SearchDoc.SearchDocBuilder searchDoc = SearchDoc.builder();
-        searchDoc.word(searchValue);
-
-        searchDocRepository.save(searchDoc.build());
-        return true;
-    }
+//    public boolean saveSearchValue(String searchValue){
+//
+//        SearchDoc.SearchDocBuilder searchDoc = SearchDoc.builder();
+//        searchDoc.word(searchValue);
+//
+//        searchDocRepository.save(searchDoc.build());
+//        return true;
+//    }
 
     public boolean updateCount() {
         updateTourListIdRecommendCount();
