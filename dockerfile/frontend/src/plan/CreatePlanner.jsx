@@ -25,7 +25,6 @@ function CreatePlanner() {
   //console.log(location);
   const areaData = location.state ? location.state.areaData : null;
   //날짜 시작일, 종료일 구하는 함수 => DatePicker
-  
 
   const checkingSDate = (i) => {
     setStartDate(i);
@@ -119,14 +118,16 @@ function CreatePlanner() {
               selectedItems={selectedItems}
               setSelectedIndex={setSelectedIndex}
             />
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "#8181F7" }}
-              size="large"
-              onClick={() => setOpenDrawer(true)} // 클릭 시 드로어 열기
-            >
-              검색하기 <KeyboardArrowRightIcon />
-            </Button>
+            <div style={{display:"flex", justifyContent:"center", paddingTop:"10%"}}>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "#8181F7", width: "95%" }}
+                size="large"
+                onClick={() => setOpenDrawer(true)} // 클릭 시 드로어 열기
+              >
+                검색하기
+              </Button>
+            </div>
           </Grid>
           <DateAlert dateLength={dateLength} />
 
@@ -156,7 +157,14 @@ function CreatePlanner() {
           </Button>
         </Link>
       </div>
-      <PlanDrawer open={openDrawer} setOpen={setOpenDrawer} />
+      <PlanDrawer
+        open={openDrawer}
+        setOpen={setOpenDrawer}
+        selectedItems={selectedItems}
+        setSelectedItems={setSelectedItems}
+        selectedIndex={selectedIndex}
+        areaData={areaData}
+      />
     </>
   );
 }
