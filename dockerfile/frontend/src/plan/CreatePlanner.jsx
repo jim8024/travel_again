@@ -10,8 +10,8 @@ import axios from "axios";
 import { format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import PlanTabs from "./PlanTabs";
-import PlanDrawer from "./PlanDrawer";
+import PlanCard from "./PlanCard";
+import PlanSearchBar from "./PlanSearchBar";
 
 function CreatePlanner() {
   const [dateLength, setDateLength] = useState(0);
@@ -89,27 +89,13 @@ function CreatePlanner() {
       </div>
       <div className="TestContainer">
         <Grid container className="gridContainer">
-          <Grid item className="rightbar" xs={12} sm={2}>
+          <Grid item className="leftbar" xs={12} sm={2}>
             <DatePicker
               onDateChange={handleDateChange}
               checkingSDate={checkingSDate}
               checkingEDate={checkingEDate}
               datesArray={datesArray}
             />
-            <PlanTabs
-              selectedItems={selectedItems}
-              setSelectedItems={setSelectedItems}
-              selectedIndex={selectedIndex}
-              areaData={areaData}
-            />
-          </Grid>
-          <Grid
-            item
-            className="leftbar"
-            xs={12}
-            sm={2}
-            style={{ padding: "0" }}
-          >
             <h3>선택된 여행지</h3>
             <hr />
             <DateAccordion
@@ -118,21 +104,25 @@ function CreatePlanner() {
               selectedItems={selectedItems}
               setSelectedIndex={setSelectedIndex}
             />
-            <div style={{display:"flex", justifyContent:"center", paddingTop:"10%"}}>
-              <Button
-                variant="contained"
-                sx={{ backgroundColor: "#8181F7", width: "95%" }}
-                size="large"
-                onClick={() => setOpenDrawer(true)} // 클릭 시 드로어 열기
-              >
-                검색하기
-              </Button>
-            </div>
           </Grid>
+         
+            
+           
+
           <DateAlert dateLength={dateLength} />
 
           <Grid item className="maparea" xs={12} sm={8}>
             <Map selectedItems={selectedItems} areaData={areaData} />
+          </Grid>
+          <Grid item className="rightbar" xs={12} sm={2}>
+         
+            <PlanSearchBar/>
+            <PlanCard
+              selectedItems={selectedItems}
+              setSelectedItems={setSelectedItems}
+              selectedIndex={selectedIndex}
+              areaData={areaData}
+            />
           </Grid>
         </Grid>
       </div>
@@ -157,14 +147,6 @@ function CreatePlanner() {
           </Button>
         </Link>
       </div>
-      <PlanDrawer
-        open={openDrawer}
-        setOpen={setOpenDrawer}
-        selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-        selectedIndex={selectedIndex}
-        areaData={areaData}
-      />
     </>
   );
 }
