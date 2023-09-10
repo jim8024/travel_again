@@ -31,7 +31,7 @@ export default function LikeList({ selectedItems, setSelectedItems, selectedInde
                 // 테스트 코드입니다
                 // const response = await fetch('http://localhost:3001/items'); // TODO : 서버쪽 데이터 들고오기
                 // if (!response.ok) {
-                //     throw new Error('네트워크 응답이 올바르지 않습니다');
+                //     throw new Error('네트워크 응답이 올바르지 않습니다'); 
                 // }
                 // const jsonData = await response.json();
                 setTourList(output); // TODO : 여기도 실제 데이터 들어올 때는 수정하기
