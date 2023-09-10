@@ -1,7 +1,7 @@
 import { IconButton, InputBase, Paper } from "@mui/material";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import "../css/PlanSearchBar.css"
+import "./css/PlanSearchBar.css"
 
 
 export default function PlanSearchBar() {
