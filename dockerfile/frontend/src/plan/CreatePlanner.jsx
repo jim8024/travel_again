@@ -12,6 +12,7 @@ import ko from "date-fns/locale/ko";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import PlanCard from "./PlanCard";
 import PlanSearchBar from "./PlanSearchBar";
+import Divider from '@mui/material/Divider';
 
 function CreatePlanner() {
   const [dateLength, setDateLength] = useState(0);
@@ -96,8 +97,7 @@ function CreatePlanner() {
               checkingEDate={checkingEDate}
               datesArray={datesArray}
             />
-            <h3>선택된 여행지</h3>
-            <hr />
+            <Divider><h3>선택된 여행지</h3></Divider>
             <DateAccordion
               dateLength={dateLength}
               setSelectedItems={setSelectedItems}
