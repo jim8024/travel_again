@@ -5,12 +5,15 @@ import WhereToGo from "./main/3_foot/WhereToGo"
 import TourListPage from "./main/3_foot/tour/TourListPage";
 import MainCarousel from "./main/2_body/MainCarousel";
 import PlanDrawer from "./plan/PlanDrawer";
+import RecommendList from "./main/2_body/RecommandList";
 function App() {
     return(
         <>
             <Main /> 
             <HowTo/>
-            <Carousel/>
+            {/* <Carousel/> */}
+            <RecommendList/>
+            <MainCarousel/>
             <WhereToGo/>
             <TourListPage/>  
             <PlanDrawer/>

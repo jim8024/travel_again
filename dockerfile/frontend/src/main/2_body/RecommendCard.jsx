@@ -12,7 +12,7 @@ import  IconButton  from '@mui/material/IconButton';
 import { Grid, Stack } from '@mui/material';
 
 
-export default function MediaCard() {
+export default function RecommendCard() {
     const [isIconChange, setIsIconChange ] = React.useState(false)
     const [isFavorite, setIsFavorite] = React.useState(false);
     const toggleBtn = () => {
@@ -25,7 +25,7 @@ export default function MediaCard() {
   return (
     <Card sx={{ width: 330 }}>
       <CardMedia
-        sx={{ height: 400 }}
+        sx={{ height: 350 }}
         image="https://source.unsplash.com/random/345×350"
         title="test"
       />
