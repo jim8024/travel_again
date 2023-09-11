@@ -47,16 +47,16 @@ public class WordSearchService  {
         List<WordSearchRspDTO> wordSearchRspDTOS2 = getTopTags("words",10);
 
 
-        System.out.println(wordSearchRspDTOS.toString());
-        System.out.println(wordSearchRspDTOS2.toString());
-        for(int i = 0 ; i < 10 ; i ++) {
-            for (int j = 0; j < 10; j++) {
+//        System.out.println(wordSearchRspDTOS.toString());
+//        System.out.println(wordSearchRspDTOS2.toString());
+        for(int i = 0 ; i < wordSearchRspDTOS2.size() ; i ++) {
+            for (int j = 0; j < wordSearchRspDTOS.size(); j++) {
                 if (wordSearchRspDTOS2.get(i).getWord().equals(wordSearchRspDTOS.get(j).getWord())) {
-                    System.out.println("i : " + i + "j : " + j);
-                    wordSearchRspDTOS2.get(i).setNo(j-i);
+//                    System.out.println("i : " + i + "j : " + j);
+                    wordSearchRspDTOS2.get(i).setNo(String.valueOf(j-i));
                     break;
                 } else {
-                    wordSearchRspDTOS2.get(i).setNo(999);
+                    wordSearchRspDTOS2.get(i).setNo("new");
                 }
             }
         }
@@ -76,7 +76,7 @@ public class WordSearchService  {
                         .aggregations("top_tags", a -> a
                                 .terms(h -> h
                                         .field(fieldname)
-                                        .size(20)
+                                        .size(size)
                                 )
                         ),
                 Void.class
@@ -86,9 +86,9 @@ public class WordSearchService  {
 
                 .get("top_tags")
                 .sterms().buckets().array().stream().map(bucket -> {
-                    if (String.valueOf(bucket.key()._get()).length()==1) {
-                        return null;
-                    }
+//                    if (String.valueOf(bucket.key()._get()).length()==1) {
+//                        return null;
+//                    }
                     WordSearchRspDTO wordSearchRspDTO = WordSearchRspDTO.builder()
                             .word(String.valueOf(bucket.key()._get()))
                             .cnt((int) bucket.docCount())
