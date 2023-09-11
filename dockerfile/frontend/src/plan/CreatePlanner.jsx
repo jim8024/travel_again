@@ -10,8 +10,9 @@ import axios from "axios";
 import { format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import PlanTabs from "./PlanTabs";
-import PlanDrawer from "./PlanDrawer";
+import PlanCard from "./PlanCard";
+import PlanSearchBar from "./PlanSearchBar";
+import Divider from "@mui/material/Divider";
 
 function CreatePlanner() {
   const [dateLength, setDateLength] = useState(0);
@@ -25,7 +26,6 @@ function CreatePlanner() {
   //console.log(location);
   const areaData = location.state ? location.state.areaData : null;
   //날짜 시작일, 종료일 구하는 함수 => DatePicker
-  
 
   const checkingSDate = (i) => {
     setStartDate(i);
@@ -60,7 +60,16 @@ function CreatePlanner() {
     return obj;
   };
 
-  const sendData = async () => {
+  const sendData = async (e) => {
+    if (
+      !selectedItems ||
+      selectedItems.length === 0 ||
+      !datesArray ||
+      datesArray.length === 0
+    ) {
+      return;
+    }
+
     const arr = convertDay(selectedItems);
     try {
       const dataToSend = {
@@ -82,6 +91,7 @@ function CreatePlanner() {
     }
   };
   console.log(datesArray);
+
   return (
     <>
       <div className="plan-header">
@@ -90,48 +100,37 @@ function CreatePlanner() {
       </div>
       <div className="TestContainer">
         <Grid container className="gridContainer">
-          <Grid item className="rightbar" xs={12} sm={2}>
+          <Grid item className="leftbar" xs={12} sm={2}>
             <DatePicker
               onDateChange={handleDateChange}
               checkingSDate={checkingSDate}
               checkingEDate={checkingEDate}
               datesArray={datesArray}
             />
-            <PlanTabs
-              selectedItems={selectedItems}
-              setSelectedItems={setSelectedItems}
-              selectedIndex={selectedIndex}
-              areaData={areaData}
-            />
-          </Grid>
-          <Grid
-            item
-            className="leftbar"
-            xs={12}
-            sm={2}
-            style={{ padding: "0" }}
-          >
-            <h3>선택된 여행지</h3>
-            <hr />
+            <Divider>
+              <h3 className="choicedList">선택된 여행지</h3>
+            </Divider>
             <DateAccordion
               dateLength={dateLength}
               setSelectedItems={setSelectedItems}
               selectedItems={selectedItems}
               setSelectedIndex={setSelectedIndex}
             />
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "#8181F7" }}
-              size="large"
-              onClick={() => setOpenDrawer(true)} // 클릭 시 드로어 열기
-            >
-              검색하기 <KeyboardArrowRightIcon />
-            </Button>
           </Grid>
+
           <DateAlert dateLength={dateLength} />
 
           <Grid item className="maparea" xs={12} sm={8}>
             <Map selectedItems={selectedItems} areaData={areaData} />
+          </Grid>
+          <Grid item className="rightbar" xs={12} sm={2}>
+            <PlanSearchBar />
+            <PlanCard
+              selectedItems={selectedItems}
+              setSelectedItems={setSelectedItems}
+              selectedIndex={selectedIndex}
+              areaData={areaData}
+            />
           </Grid>
         </Grid>
       </div>
@@ -145,18 +144,34 @@ function CreatePlanner() {
             endDate: formattedEndDate,
             datesArray: datesArray,
           }}
+          onClick={(e) => {
+            if (
+              !selectedItems ||
+              selectedItems.length === 0 ||
+              !datesArray ||
+              datesArray.length === 0
+            ) {
+              e.preventDefault(); // 라우팅 방지
+            }
+            sendData(e); // sendData 함수 호출
+          }}
         >
           <Button
             variant="contained"
             sx={{ backgroundColor: "#8181F7" }}
-            onClick={sendData}
+           
             size="large"
+            disabled={
+              !selectedItems ||
+              selectedItems.length === 0 ||
+              !datesArray ||
+              datesArray.length === 0
+            }
           >
             일정 생성하기 <KeyboardArrowRightIcon />
           </Button>
         </Link>
       </div>
-      <PlanDrawer open={openDrawer} setOpen={setOpenDrawer} />
     </>
   );
 }
