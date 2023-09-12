@@ -13,7 +13,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import PlanCard from "./PlanCard";
 import PlanSearchBar from "./PlanSearchBar";
 import Divider from "@mui/material/Divider";
-import RealTimeModal from "./modal/RealTimeModal"; // Modal 컴포넌트를 가져옵니다.
+import Modal from "./modal/RealTimeModal"; // Modal 컴포넌트를 가져옵니다.
 
 function CreatePlanner() {
   const [dateLength, setDateLength] = useState(0);
@@ -62,16 +62,7 @@ function CreatePlanner() {
     return obj;
   };
 
-  const sendData = async (e) => {
-    if (
-      !selectedItems ||
-      selectedItems.length === 0 ||
-      !datesArray ||
-      datesArray.length === 0
-    ) {
-      return;
-    }
-
+  const sendData = async () => {
     const arr = convertDay(selectedItems);
     try {
       const dataToSend = {
@@ -93,6 +84,7 @@ function CreatePlanner() {
     }
   };
   console.log(datesArray);
+
   const realModalOpen = () => {
     setRealModal(true);
   };
@@ -100,21 +92,20 @@ function CreatePlanner() {
   const realModalClose = () => {
     setRealModal(false);
   };
-  const realTimeBtnStyle = { left: "1380px" };
+  const searchBtn = {
+    left: "1380px",
+  };
   return (
     <>
       <div className="plan-header">
         <p className="kor-title">{areaData.korTitle}</p>
         <p className="eng-title">{areaData.engTitle}</p>
       </div>
-      <Button
-        className="realTimeBtn"
-        onClick={realModalOpen}
-        style={realTimeBtnStyle}
-      >
+      <Button className="realTimeBtn" style={searchBtn} onClick={realModalOpen}>
         실시간 인기검색어
       </Button>
-      <RealTimeModal isOpen={realModal} onClose={realModalClose} />
+      <Modal isOpen={realModal} onClose={realModalClose} />
+
       <div className="TestContainer">
         <Grid container className="gridContainer">
           <Grid item className="leftbar" xs={12} sm={2}>
@@ -125,7 +116,7 @@ function CreatePlanner() {
               datesArray={datesArray}
             />
             <Divider>
-              <h3 className="choicedList">선택된 여행지</h3>
+              <h3>선택된 여행지</h3>
             </Divider>
             <DateAccordion
               dateLength={dateLength}
@@ -134,7 +125,6 @@ function CreatePlanner() {
               setSelectedIndex={setSelectedIndex}
             />
           </Grid>
-
           <DateAlert dateLength={dateLength} />
 
           <Grid item className="maparea" xs={12} sm={8}>
@@ -161,28 +151,12 @@ function CreatePlanner() {
             endDate: formattedEndDate,
             datesArray: datesArray,
           }}
-          onClick={(e) => {
-            if (
-              !selectedItems ||
-              selectedItems.length === 0 ||
-              !datesArray ||
-              datesArray.length === 0
-            ) {
-              e.preventDefault(); // 라우팅 방지
-            }
-            sendData(e); // sendData 함수 호출
-          }}
         >
           <Button
             variant="contained"
             sx={{ backgroundColor: "#8181F7" }}
+            onClick={sendData}
             size="large"
-            disabled={
-              !selectedItems ||
-              selectedItems.length === 0 ||
-              !datesArray ||
-              datesArray.length === 0
-            }
           >
             일정 생성하기 <KeyboardArrowRightIcon />
           </Button>
