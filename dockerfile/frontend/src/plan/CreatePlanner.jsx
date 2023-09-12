@@ -13,6 +13,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import PlanCard from "./PlanCard";
 import PlanSearchBar from "./PlanSearchBar";
 import Divider from "@mui/material/Divider";
+import RealTimeModal from "./modal/RealTimeModal"; // Modal 컴포넌트를 가져옵니다.
 
 function CreatePlanner() {
   const [dateLength, setDateLength] = useState(0);
@@ -22,6 +23,7 @@ function CreatePlanner() {
   const [endDate, setEndDate] = useState(0);
   const [datesArray, setDatesArray] = useState(0);
   const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [realModal, setRealModal] = React.useState(false);
   const location = useLocation();
   //console.log(location);
   const areaData = location.state ? location.state.areaData : null;
@@ -91,13 +93,28 @@ function CreatePlanner() {
     }
   };
   console.log(datesArray);
+  const realModalOpen = () => {
+    setRealModal(true);
+  };
 
+  const realModalClose = () => {
+    setRealModal(false);
+  };
+  const realTimeBtnStyle = { left: "1380px" };
   return (
     <>
       <div className="plan-header">
         <p className="kor-title">{areaData.korTitle}</p>
         <p className="eng-title">{areaData.engTitle}</p>
       </div>
+      <Button
+        className="realTimeBtn"
+        onClick={realModalOpen}
+        style={realTimeBtnStyle}
+      >
+        실시간 인기검색어
+      </Button>
+      <RealTimeModal isOpen={realModal} onClose={realModalClose} />
       <div className="TestContainer">
         <Grid container className="gridContainer">
           <Grid item className="leftbar" xs={12} sm={2}>
@@ -159,7 +176,6 @@ function CreatePlanner() {
           <Button
             variant="contained"
             sx={{ backgroundColor: "#8181F7" }}
-           
             size="large"
             disabled={
               !selectedItems ||
