@@ -39,7 +39,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
    * @param registry
    */
   public void registerStompEndpoints(StompEndpointRegistry registry) {
-    registry.addEndpoint("/gs-websocket");
+    registry.addEndpoint("/gs-websocket")
+            .setAllowedOrigins("*");
   }
-
 }
