@@ -49,6 +49,8 @@ public class controller {
 //  @Scheduled(cron = "0/10 * * * * *" )
   public void sendMsg() throws Exception{
 
+//    if(true && Webs){}
+
 //    GreetingMessag greetingMessag = GreetingMessag.builder()
 //            .content("[메세지]" + UuidUtils.getUUID() + " ..... !").build();
     Gson gson = new Gson();
