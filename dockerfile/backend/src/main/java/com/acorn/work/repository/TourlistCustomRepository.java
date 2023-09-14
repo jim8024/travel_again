@@ -1,7 +1,6 @@
 package com.acorn.work.repository;
 
 import com.acorn.work.dto.TourlistConditionReqDTO;
-import com.acorn.work.dto.TourlistDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;

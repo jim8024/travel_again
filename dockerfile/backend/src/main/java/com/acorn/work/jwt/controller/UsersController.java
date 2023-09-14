@@ -44,16 +44,16 @@ public class UsersController {
     }
 
     @PostMapping("/member/signin")
-    public ResponseEntity auth(@RequestBody MemberDTO memberDTO) throws Exception {
+    public ResponseEntity auth(@RequestBody MemberDTO memberDTO) {
         MemberEntity memberEntity = MemberMapper.INSTANCE.toEntity(memberDTO);
         System.out.println(memberEntity.getUsername() + " ||| " + memberEntity.getPassword());
-        try {
+
             authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(memberEntity.getUsername(),memberEntity.getPassword()));
-        } catch (Exception e ){
-            e.printStackTrace();
-            throw new Exception("아디비번땡");
-        }
+
+//            e.printStackTrace();
+//            throw new BizException("아디비번땡");
+
         String token = jwtUtil.generateToken(memberEntity.getMemberId());
         return ResponseUtils.completed(token);
     }
