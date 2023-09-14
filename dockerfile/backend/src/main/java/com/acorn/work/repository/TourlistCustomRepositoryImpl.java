@@ -1,7 +1,6 @@
 package com.acorn.work.repository;
 
 import com.acorn.work.dto.TourlistConditionReqDTO;
-import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.entity.QTourlistEntity;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.ConstructorExpression;

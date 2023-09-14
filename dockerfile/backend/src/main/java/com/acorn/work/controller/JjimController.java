@@ -2,7 +2,6 @@ package com.acorn.work.controller;
 
 import com.acorn.core.utils.ResponseUtils;
 import com.acorn.work.dto.JjimDTO;
-import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.mapstruct.TourlistMapper;
 import com.acorn.work.repository.TourlistRepository;
 import com.acorn.work.service.JjimService;
