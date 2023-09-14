@@ -2,12 +2,16 @@ package com.acorn.work.controller;
 
 import com.acorn.core.utils.ResponseUtils;
 import com.acorn.work.dto.JjimDTO;
+import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.mapstruct.TourlistMapper;
 import com.acorn.work.repository.TourlistRepository;
 import com.acorn.work.service.JjimService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Random;
