@@ -66,6 +66,8 @@ public class WebSecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/auth"),
                         new AntPathRequestMatcher("/hello/token/**")
                         , new AntPathRequestMatcher("/auth2")
+                        , new AntPathRequestMatcher("/member/signin")
+                        , new AntPathRequestMatcher("/member/signup")
                         ,new AntPathRequestMatcher("/**")
                 )
                 .permitAll()
