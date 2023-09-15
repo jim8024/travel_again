@@ -2,6 +2,7 @@ package com.acorn.work.service;
 
 import com.acorn.core.common.dto.ResponsePageDTO;
 import com.acorn.work.dto.TourlistConditionReqDTO;
+import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.entity.TourlistEntity;
 import com.acorn.work.mapstruct.TourlistMapper;
 import com.acorn.work.repository.TourlistCustomRepositoryImpl;

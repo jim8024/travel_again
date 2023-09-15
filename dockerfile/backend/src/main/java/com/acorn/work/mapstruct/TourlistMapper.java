@@ -1,5 +1,6 @@
 package com.acorn.work.mapstruct;
 
+import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.entity.TourlistEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
