@@ -33,4 +33,14 @@ public interface TourListDocRepository extends ElasticsearchRepository<TourListD
     List<TourListDoc> findByOrderByRecommendCountDesc(Pageable pageable);
 
     Page<TourListDoc> findByTitleOrOverviewOrAddr1(String title, String overview, String addr1, Pageable pageable);
+
+    List<TourListDoc> findByAreacodeOrderByRecommendCountDesc(String areacode,Pageable pageable);
+
+    List<TourListDoc> findByOrderByTitleDesc();
+
+    List<TourListDoc> findByOrderByRatingDesc(Pageable pageable);
+
+    Page<TourListDoc> findByAreacodeAndTitleOrOverviewOrAddr1(String areacode, String title, String overview, String addr1,Pageable pageable);
+
+    Page<TourListDoc> findByAreacodeAndOverview(String areacode, String overview, Pageable pageable);
 }

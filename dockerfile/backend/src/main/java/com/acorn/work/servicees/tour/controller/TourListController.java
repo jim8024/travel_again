@@ -21,15 +21,25 @@ public class TourListController {
         return ResponseUtils.completed(tourListService.getTourList());
     }
 
-    @PostMapping("/es/search")
+    @RequestMapping("/es/search")
     public ResponseEntity searchlist(@RequestParam("searchValue") String searchValue,Pageable pageable){
         return ResponseUtils.completed(tourListService.getTourList(searchValue,pageable));
     }
 
+    @RequestMapping("es/search/{areacode}")
+    public ResponseEntity searchTourListByAreacode(@RequestParam("searchValue") String searchValue,Pageable pageable,@PathVariable String areacode){
+
+        return ResponseUtils.completed(tourListService.getTourList2(searchValue,pageable,areacode));
+    }
+
+//    @RequestMapping("/es/search/{areacode}")
+//    public ResponseEntity searchlistByAreacode(@RequestParam("searchValue") String searchValue,@PathVariable String areacode, Pageable pageable){
+//        return ResponseUtils.completed(tourListService.getTourListByAreacode(searchValue,areacode,pageable));
+//    }
+
     @PostMapping("/es/title")
     // @RequestParam("title")
     public ResponseEntity getTitle(@RequestParam("searchValue") String searchValue) {
-//        System.out.println(searchValue);
         return ResponseUtils.completed(tourListService.getTourListByTitle(searchValue));
     }
 
@@ -66,13 +76,37 @@ public class TourListController {
         return ResponseUtils.completed(tourListService.updateCount());
     }
 
-    @PostMapping("/es/addCountDesc")
+    @PostMapping("/es/addCountDesc/all")
     public ResponseEntity findByTourlistOrderByAddCountDesc() {
-        return ResponseUtils.completed(tourListService.getTourlistByAddCount());
+        return ResponseUtils.completed(tourListService.getTourlistByAddCountTop9());
     }
 
-    @PostMapping("/es/recommendCountDesc")
-    public ResponseEntity findByTourlistOrderByRecommemdCountDesc(){
-        return ResponseUtils.completed(tourListService.getTourlistByRecommendCount());
+
+    @RequestMapping("/es/recCountDesc/all")
+    public ResponseEntity findByTourlistOrderByRecommendCountDesc() {
+        return ResponseUtils.completed(tourListService.getTourlistByRecommendCountTop9());
     }
+
+    @RequestMapping("/es/ratingDesc/all")
+    public ResponseEntity findByTourlistOrderByRatingDesc() {
+        return ResponseUtils.completed(tourListService.getTourlistOrderByRatingDesc());
+    }
+
+    @RequestMapping("/es/addCountDesc/{areacode}")
+    public ResponseEntity findByTourlistOrderByAddCountDesc(@PathVariable String areacode) {
+        return ResponseUtils.completed(tourListService.getTourlistByAddCountByAreacode(areacode));
+    }
+
+    @RequestMapping("/es/recommendCountDesc/{areacode}")
+    public ResponseEntity findByTourlistOrderByRecommemdCountDesc(@PathVariable String areacode){
+//        System.out.println(areaData);
+        return ResponseUtils.completed(tourListService.getTourlistByRecommendCount(areacode));
+    }
+
+//    @PostMapping("/es/addCountDesc")
+//    public ResponseEntity findByTourlistOrderByRecommendCountDesc(@PathVariable String areaData) {
+//
+//        return ResponseUtils.completed(tourListService.getTourlistByRecommendCount(areaData));
+//    }
+
 }
