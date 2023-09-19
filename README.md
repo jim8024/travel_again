@@ -37,7 +37,7 @@
 <p align="center"><img src="https://github.com/jim8024/travel_again/assets/114633829/ebf878fe-ea95-432e-87e0-474076f3c629"/></p>
 
 
-# 배포 주소
+# 서버 주소
 #### 프론트 서버 : localhost:3000
 #### 백엔드 서버 : localhost:9000
 <br/>
