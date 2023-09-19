@@ -13,15 +13,18 @@
 #### 간단한 몇 가지 정보를 입력하고, 원하는 지역과 활동을 선택하면 그에 맞게 인기 관광지 정보를 제공합니다.
 <br/>
 
-# 주요 기능
+# 🔧 주요 기능
+<p align="center"><img src="https://github.com/jim8024/travel_again/assets/114633829/02ed4cec-bd4c-4365-bf71-cc3973a26b17"/></p>
+
 ⭐ 위치기반 검색
 - 사용자가 원하는 위치를 검색하면 해당 위치 근거리에 있는 관광명소 목록을 제공
+<br/>
 
 ⭐ 기록 기능
 - 사용자가 여행 계획을 원활하게 계획할 수 있도록 기록 기능 제공
 <br/>
 
-# 🔬 Travel Again 서비스 화면
+# 🔎 Travel Again 서비스 화면
 ## 메인 화면
 <p align="center"><img src="https://github.com/jim8024/travel_again/assets/114633829/204a9626-9f14-40bd-998a-62c3b1de15fd"/></p>
 <p align="center"><img src="https://github.com/jim8024/travel_again/assets/114633829/4c3469a0-2d2b-4443-a5af-442d46414a70"/></p>
