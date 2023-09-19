@@ -85,6 +85,7 @@ For building and running the application you need:
 - React 18.2.0
 - Recoil 0.7.7
 - Node.js 18.17.0
+- MUI 5.14.10
 
 ### CI/CD
 - NGINX 1.25.2
