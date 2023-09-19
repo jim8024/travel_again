@@ -34,14 +34,14 @@ export default function SignIn() {
                 memberId: data.get("id"),
                 pwd: data.get("password"),
             });
-
             // 로그인이 성공한 경우, 세션에 로그인 정보 저장
-            if (response.data.success) {
+            if (response.data) {
                 localStorage.setItem("token", response.data.token);
                 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
                 navigate("/");
             }
             console.log("서버 응답:", response.data);
+            navigate("/");
         } catch (error) {
             console.error("오류:", error);
         }
