@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.HtmlUtils;
 
@@ -46,7 +47,7 @@ public class controller {
   }
 
 
-//  @Scheduled(cron = "0/10 * * * * *" )
+  @Scheduled(cron = "0/5 * * * * *" )
   public void sendMsg() throws Exception{
 
 //    if(true && Webs){}
@@ -58,7 +59,7 @@ public class controller {
     GreetingMessag greetingMessag = GreetingMessag.builder()
             .content(gson.toJson(wordSearchService.comparisonWord())).build();
 
-    log.debug("cron 15초 이후 실행.. "
+    log.debug("cron 10초 이후 실행.. "
             + Thread.currentThread().getName() + " : "
             + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd'T'HH:mm:ss")));
 
