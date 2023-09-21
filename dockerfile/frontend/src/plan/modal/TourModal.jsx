@@ -22,7 +22,7 @@ const TourModal = ({ isOpen, onClose, contentid }) => {
     const contentRef = useRef(null);
 
     if (!isOpen) return null;
-    
+
     const tourData = tourjson.find((item) => item.contentid === parseInt(contentid));
     
 

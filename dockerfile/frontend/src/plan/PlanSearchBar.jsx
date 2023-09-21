@@ -8,7 +8,6 @@ export default function PlanSearchBar({ onSearch, areaData, page }) {
   const [keyword, setKeyword] = useState("");
   
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     let response = [];
@@ -28,6 +27,7 @@ export default function PlanSearchBar({ onSearch, areaData, page }) {
 
       // 검색 결과를 상위 컴포넌트로 전달
       onSearch(response); // response.data는 서버 응답 데이터입니다.
+
       
       
     } catch (error) {
