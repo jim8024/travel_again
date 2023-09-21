@@ -21,7 +21,7 @@ const TourModal = ({ isOpen, onClose, contentid }) => {
     const contentRef = useRef(null);
 
     if (!isOpen) return null;
-    const tourData = tourjson.find((item) => item.contentid === contentid);
+    const tourData = tourjson.find((item) => item.contentid === parseInt(contentid));
 
     const handleExpandToggle = () => {
         setExpanded(!expanded);
