@@ -8,22 +8,26 @@ export default function PlanSearchBar({ onSearch, areaData, page }) {
   const [keyword, setKeyword] = useState("");
   
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    let response = [];
     try {
-      if(!keyword){
-        keyword=""
-      }
+      console.log("keyword : " + keyword)
+      if(keyword===""){
+        const response2 = await axios.post(`http://192.168.0.86:9000/tourlist/es/search/${areaData.areacode}?searchValue=${keyword}&page=${page}&size=6`,{keyword});
+        response = response2.data.data.content
+        
+      } else {
       // 검색어를 서버로 전송
-      const response = await axios.post(`http://192.168.0.86:9000/tourlist/es/search/${areaData.areacode}?searchValue=${keyword}&page=${page}&size=6`, { keyword });
-
+      const response2 = await axios.post(`http://192.168.0.86:9000/tourlist/es/search/${areaData.areacode}?searchValue=${keyword}&page=${page}&size=6`, { keyword });
+      response = response2.data.data.content
+    }
       // 서버 응답을 처리하거나 필요한 작업을 수행할 수 있습니다.
-      console.log("서버 응답:", response.data.data.content);
+      console.log("서버 응답:", response);
 
       // 검색 결과를 상위 컴포넌트로 전달
-      onSearch(response.data.data.content); // response.data는 서버 응답 데이터입니다.
+      onSearch(response); // response.data는 서버 응답 데이터입니다.
+
       
       
     } catch (error) {

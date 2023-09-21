@@ -44,7 +44,9 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
                 if (response.status !== 200) {
                     throw new Error("네트워크 응답이 올바르지 않습니다");
                 }
-                const jsonData = await response.data.data;
+
+                const jsonData = await response.data.data.content;
+
                 console.log(jsonData)
                 setTourList(jsonData);
                 

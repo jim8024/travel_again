@@ -133,6 +133,7 @@ function CreatePlanner() {
             <Map selectedItems={selectedItems} areaData={areaData} />
           </Grid>
           <Grid item className="rightbar" xs={12} sm={2}>
+
             <PlanCard
               selectedItems={selectedItems}
               setSelectedItems={setSelectedItems}
